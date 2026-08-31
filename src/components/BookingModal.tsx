@@ -13,6 +13,7 @@ import {
   ExternalLink,
 } from 'lucide-react';
 import type { Language } from '../localization';
+import { sendLead } from '../utils/leadCapture';
 
 interface BookingModalProps {
   open: boolean;
@@ -49,6 +50,7 @@ export const BookingModal = ({ open, onClose, language }: BookingModalProps) => 
   const [time, setTime] = useState<string | null>(null);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [bookingSubmitting, setBookingSubmitting] = useState(false);
 
   // Generate next 10 days (skip Sundays)
   const days = useMemo(() => {
@@ -286,14 +288,39 @@ export const BookingModal = ({ open, onClose, language }: BookingModalProps) => 
                     </div>
 
                     <motion.button
-                      whileHover={{ scale: canConfirm ? 1.02 : 1 }}
-                      whileTap={{ scale: canConfirm ? 0.98 : 1 }}
-                      onClick={() => canConfirm && setStep(3)}
-                      disabled={!canConfirm}
+                      whileHover={{ scale: canConfirm && !bookingSubmitting ? 1.02 : 1 }}
+                      whileTap={{ scale: canConfirm && !bookingSubmitting ? 0.98 : 1 }}
+                      onClick={async () => {
+                        if (!canConfirm || !date || !time) return;
+                        setBookingSubmitting(true);
+                        try {
+                          await sendLead({
+                            name,
+                            email,
+                            source: 'booking',
+                            bookingDate: date.toISOString(),
+                            bookingTime: time,
+                          });
+                          setStep(3);
+                        } finally {
+                          setBookingSubmitting(false);
+                        }
+                      }}
+                      disabled={!canConfirm || bookingSubmitting}
                       className="w-full mt-5 py-4 rounded-xl btn-primary text-black font-semibold disabled:opacity-40 flex items-center justify-center gap-2"
                     >
-                      <CheckCircle2 className="w-5 h-5" />
-                      Confirm Booking
+                      {bookingSubmitting ? (
+                        <motion.div
+                          animate={{ rotate: 360 }}
+                          transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                          className="w-5 h-5 border-2 border-black/30 border-t-black rounded-full"
+                        />
+                      ) : (
+                        <>
+                          <CheckCircle2 className="w-5 h-5" />
+                          Confirm Booking
+                        </>
+                      )}
                     </motion.button>
                   </motion.div>
                 )}

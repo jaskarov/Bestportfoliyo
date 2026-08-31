@@ -43,6 +43,7 @@ import { TestimonialsSection } from './components/TestimonialsSection';
 import { BookingModal } from './components/BookingModal';
 import { UISoundEngine } from './components/UISoundEngine';
 import { AutoTranslator, type Language } from './localization';
+import { sendLead } from './utils/leadCapture';
 
 // Particle Background Component
 const ParticleBackground = () => {
@@ -514,9 +515,9 @@ const HeroSection = ({ onBookCall }: { onBookCall: () => void }) => {
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8"
         >
           <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-          <span className="text-sm text-white/80">Available for new projects</span>
+          <span className="text-sm text-white/80">Open for product, AI, and SaaS work</span>
           <span className="text-white/20">·</span>
-          <span className="text-sm text-white/50">2 slots left this month</span>
+          <span className="text-sm text-white/50">Available for new projects</span>
         </motion.div>
 
         {/* Main Heading */}
@@ -538,7 +539,7 @@ const HeroSection = ({ onBookCall }: { onBookCall: () => void }) => {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-xl md:text-2xl text-white/60 mb-4"
         >
-          Senior Full-Stack & AI Engineer
+          Full-Stack Engineer • AI Automation Builder • Product Developer
         </motion.p>
 
         {/* Description */}
@@ -548,8 +549,7 @@ const HeroSection = ({ onBookCall }: { onBookCall: () => void }) => {
           transition={{ duration: 0.8, delay: 0.5 }}
           className="text-base md:text-lg text-white/40 max-w-2xl mx-auto mb-10"
         >
-          Architecting intelligent digital experiences at the intersection of 
-          cutting-edge web technologies and artificial intelligence.
+          I design and build fast, scalable web products, internal tools, and AI-powered experiences that help businesses automate operations and turn ideas into real customer value.
         </motion.p>
 
         {/* CTA Buttons */}
@@ -627,27 +627,27 @@ const QuestMapSection = () => {
   const experiences = [
     {
       period: '2024 - Present',
-      title: 'Middle Full-Stack Engineer',
-      company: 'TechCorp Innovatsiya Markazi',
-      description: 'Leading microservices architecture and AI integration projects. Developing scalable enterprise solutions with modern tech stack.',
-      skills: ['Microservices', 'AI Integration', 'Kubernetes', 'GraphQL'],
+      title: 'Full-Stack & AI Engineer',
+      company: 'Independent Consultant / Product Engineering',
+      description: 'Building product-facing web applications, automation flows, and AI-enabled business tools that solve real operational bottlenecks for clients and startups.',
+      skills: ['Product Engineering', 'AI Workflows', 'SaaS UX', 'System Design'],
       icon: Briefcase,
       type: 'work'
     },
     {
       period: '2022 - 2024',
-      title: 'Full-Stack Developer',
-      company: 'SoftSolutions IT',
-      description: 'Built comprehensive ERP systems using React and Node.js. Optimized database performance and implemented real-time features.',
-      skills: ['React', 'Redux', 'Node.js', 'PostgreSQL'],
+      title: 'Frontend & Full-Stack Developer',
+      company: 'Digital Product Studio',
+      description: 'Delivered web platforms, dashboards, and internal tools using React, Node.js, and backend integrations for business and customer workflows.',
+      skills: ['React', 'Node.js', 'APIs', 'Database Design'],
       icon: Code2,
       type: 'work'
     },
     {
-      period: '2022 - 2026',
-      title: 'Bachelor of Computer Science',
-      company: 'Tashkent University of Applied Sciences',
-      description: 'Pursuing degree in Computer Science with focus on Software Engineering and Artificial Intelligence.',
+      period: '2020 - 2024',
+      title: 'Computer Science & Software Engineering',
+      company: 'University Studies',
+      description: 'Focused on software engineering, algorithms, data structures, and modern application architecture with practical product implementation.',
       skills: ['Algorithms', 'Data Structures', 'AI', 'Software Engineering'],
       icon: GraduationCap,
       type: 'education'
@@ -1259,12 +1259,22 @@ const ContactSection = ({ onBookCall }: { onBookCall: () => void }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    setIsSubmitting(false);
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
-    setFormState({ name: '', email: '', message: '' });
+
+    try {
+      await sendLead({
+        name: formState.name,
+        email: formState.email,
+        message: formState.message,
+        source: 'contact',
+      });
+      setSubmitted(true);
+    } catch {
+      setSubmitted(false);
+    } finally {
+      setIsSubmitting(false);
+      setTimeout(() => setSubmitted(false), 3000);
+      setFormState({ name: '', email: '', message: '' });
+    }
   };
 
   const contactInfo = [
