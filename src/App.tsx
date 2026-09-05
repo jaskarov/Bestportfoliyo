@@ -1047,19 +1047,18 @@ const BudgetCalculatorSection = () => {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   const services = [
-    { id: 'frontend', name: 'Frontend Development', price: 2500, icon: Palette },
-    { id: 'backend', name: 'Backend Development', price: 3000, icon: Server },
-    { id: 'ai', name: 'AI Integration', price: 4000, icon: Brain },
-    { id: 'database', name: 'Database Design', price: 1500, icon: Database },
-    { id: 'api', name: 'API Development', price: 2000, icon: Globe },
-    { id: 'devops', name: 'DevOps & Deployment', price: 1800, icon: Cloud },
+    { id: 'frontend', name: 'Frontend Development', price: 150, icon: Palette },
+    { id: 'backend', name: 'Backend Development', price: 200, icon: Server },
+    { id: 'ai', name: 'AI Integration', price: 300, icon: Brain },
+    { id: 'database', name: 'Database Design', price: 100, icon: Database },
+    { id: 'api', name: 'API Development', price: 150, icon: Globe },
+    { id: 'devops', name: 'DevOps & Deployment', price: 120, icon: Cloud },
   ];
 
-  // Pre-selected so visitors see a real estimate the moment they scroll in
+  // Pre-selected so visitors see a realistic Uzbekistan-adapted estimate
   const [selectedServices, setSelectedServices] = useState<string[]>([
     'frontend',
     'backend',
-    'ai',
   ]);
   const [complexity, setComplexity] = useState<'simple' | 'medium' | 'complex'>('medium');
 

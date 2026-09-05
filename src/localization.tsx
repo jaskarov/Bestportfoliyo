@@ -5,6 +5,16 @@ export type Language = 'EN' | 'UZ' | 'RU';
 type TranslationTable = Record<string, string>;
 
 const UZ: TranslationTable = {
+  'Open for product, AI, and SaaS work': 'Mahsulot, AI va SaaS loyihalari uchun ochiq',
+  'Full-Stack Engineer • AI Automation Builder • Product Developer': 'Full-Stack muhandis • AI avtomatlashtirish • Mahsulot dasturchisi',
+  'I design and build fast, scalable web products, internal tools, and AI-powered experiences that help businesses automate operations and turn ideas into real customer value.':
+    'Biznes operatsiyalarini avtomatlashtiruvchi va g\'oyalarni real qiymatga aylantiruvchi tezkor, kengayuvchan veb-mahsulotlar va AI yechimlari yarataman.',
+  '15-minute discovery call': '15 daqiqalik tanishuv qo\'ng\'irog\'i',
+  'Book a free 15-minute discovery call': 'Bepul 15 daqiqalik tanishuv qo\'ng\'irog\'i band qiling',
+  'Prefer to talk it through?': 'Batafsil gaplashishni ma\'qul ko\'rasizmi?',
+  'Explore Work': 'Ishlarni ko\'rish',
+  'Book 15-min Discovery Call': '15 daqiqalik tanishuv qo\'ng\'irog\'i',
+  'Book a 15-min Discovery Call': '15 daqiqalik tanishuv qo\'ng\'irog\'i band qilish',
   // Navigation and hero
   'Quest Map': 'Karyera yo\'li',
   Skills: 'Ko\'nikmalar',
@@ -21,8 +31,6 @@ const UZ: TranslationTable = {
   'Senior Full-Stack & AI Engineer': 'Senior Full-Stack va AI muhandis',
   'Architecting intelligent digital experiences at the intersection of cutting-edge web technologies and artificial intelligence.':
     'Ilg\'or veb-texnologiyalar va sun\'iy intellekt kesishmasida aqlli raqamli mahsulotlar yarataman.',
-  'Explore Work': 'Ishlarni ko\'rish',
-  'Book 15-min Discovery Call': '15 daqiqalik tanishuv qo\'ng\'irog\'i',
 
   // Journey
   'Career Journey': 'Karyera yo\'li',
@@ -284,8 +292,6 @@ const UZ: TranslationTable = {
   Message: 'Xabar',
   'Tell me about your project...': 'Loyihangiz haqida yozing...',
   'Message Sent!': 'Xabar yuborildi!',
-  'Prefer to talk it through?': 'Gaplashib olishni xohlaysizmi?',
-  'Book a free 15-minute discovery call': 'Bepul 15 daqiqalik tanishuv qo\'ng\'irog\'ini band qiling',
   'Typical response time': 'Odatdagi javob vaqti',
   'Under 3 hours · GMT+5 timezone': '3 soatdan kam · GMT+5',
   Location: 'Joylashuv',
@@ -318,6 +324,16 @@ const UZ: TranslationTable = {
 };
 
 const RU: TranslationTable = {
+  'Open for product, AI, and SaaS work': 'Открыт для разработки продуктов, AI и SaaS',
+  'Full-Stack Engineer • AI Automation Builder • Product Developer': 'Full-Stack инженер • Создатель AI-автоматизации • Продуктовый разработчик',
+  'I design and build fast, scalable web products, internal tools, and AI-powered experiences that help businesses automate operations and turn ideas into real customer value.':
+    'Я проектирую и создаю быстрые, масштабируемые веб-продукты, внутренние инструменты и AI-решения, помогающие бизнесу автоматизировать процессы.',
+  '15-minute discovery call': '15-минутный ознакомительный звонок',
+  'Book a free 15-minute discovery call': 'Забронируйте бесплатный 15-минутный звонок',
+  'Prefer to talk it through?': 'Предпочитаете обсудить голосом?',
+  'Explore Work': 'Смотреть работы',
+  'Book 15-min Discovery Call': '15-мин ознакомительный звонок',
+  'Book a 15-min Discovery Call': 'Забронировать 15-мин звонок',
   // Navigation and hero
   'Quest Map': 'Путь карьеры',
   Skills: 'Навыки',
@@ -334,8 +350,6 @@ const RU: TranslationTable = {
   'Senior Full-Stack & AI Engineer': 'Senior Full-Stack и AI-инженер',
   'Architecting intelligent digital experiences at the intersection of cutting-edge web technologies and artificial intelligence.':
     'Создаю интеллектуальные цифровые продукты на пересечении современных веб-технологий и искусственного интеллекта.',
-  'Explore Work': 'Смотреть проекты',
-  'Book 15-min Discovery Call': 'Забронировать 15-минутный звонок',
 
   // Journey
   'Career Journey': 'Карьерный путь',
@@ -597,8 +611,6 @@ const RU: TranslationTable = {
   Message: 'Сообщение',
   'Tell me about your project...': 'Расскажите о вашем проекте...',
   'Message Sent!': 'Сообщение отправлено!',
-  'Prefer to talk it through?': 'Предпочитаете обсудить голосом?',
-  'Book a free 15-minute discovery call': 'Забронируйте бесплатный 15-минутный звонок',
   'Typical response time': 'Обычно отвечаю',
   'Under 3 hours · GMT+5 timezone': 'Менее чем за 3 часа · GMT+5',
   Location: 'Локация',
@@ -650,10 +662,12 @@ const translate = (value: string, language: Language) => {
   return TABLES[language][english] ?? english;
 };
 
+const originalTextNodes = new WeakMap<Text, { prefix: string; raw: string; suffix: string }>();
+const originalAttrNodes = new WeakMap<Element, Record<string, string>>();
+
 /**
- * Localizes static React output without coupling every visual component to a
- * translation library. Dynamic terminal/code regions opt out with
- * data-no-translate so code remains untouched.
+ * Localizes static React output cleanly by caching the original English text in a WeakMap,
+ * preventing corrupted reverse-translation when users toggle languages rapidly.
  */
 export const AutoTranslator = ({ language }: { language: Language }) => {
   useEffect(() => {
@@ -665,20 +679,42 @@ export const AutoTranslator = ({ language }: { language: Language }) => {
 
     const translateTextNode = (node: Text) => {
       if (shouldSkip(node.parentElement)) return;
-      const value = node.nodeValue ?? '';
-      const match = value.match(/^(\s*)(.*?)(\s*)$/s);
-      if (!match || !match[2]) return;
-      const next = `${match[1]}${translate(match[2], language)}${match[3]}`;
-      if (next !== value) node.nodeValue = next;
+      const currentVal = node.nodeValue ?? '';
+
+      let orig = originalTextNodes.get(node);
+      if (!orig) {
+        const match = currentVal.match(/^(\s*)(.*?)(\s*)$/s);
+        if (!match || !match[2]) return;
+        const english = resolveEnglish(match[2]);
+        orig = { prefix: match[1], raw: english, suffix: match[3] };
+        originalTextNodes.set(node, orig);
+      }
+
+      const next = `${orig.prefix}${language === 'EN' ? orig.raw : (TABLES[language][orig.raw] ?? orig.raw)}${orig.suffix}`;
+      if (node.nodeValue !== next) {
+        node.nodeValue = next;
+      }
     };
 
     const translateAttributes = (element: Element) => {
       if (shouldSkip(element)) return;
+      let map = originalAttrNodes.get(element);
+      if (!map) {
+        map = {};
+        originalAttrNodes.set(element, map);
+      }
+
       ['placeholder', 'title', 'aria-label'].forEach((attribute) => {
         const value = element.getAttribute(attribute);
         if (!value) return;
-        const next = translate(value, language);
-        if (next !== value) element.setAttribute(attribute, next);
+        if (!map![attribute]) {
+          map![attribute] = resolveEnglish(value);
+        }
+        const origEng = map![attribute];
+        const next = language === 'EN' ? origEng : (TABLES[language][origEng] ?? origEng);
+        if (value !== next) {
+          element.setAttribute(attribute, next);
+        }
       });
     };
 
