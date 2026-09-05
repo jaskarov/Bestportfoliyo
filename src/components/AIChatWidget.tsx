@@ -45,9 +45,9 @@ const knowledgeBase: KnowledgeEntry[] = [
       'My core arsenal:\n\n• Frontend — React, TypeScript, Vue, Next.js, Tailwind (95%)\n• Backend — Node.js, Python, FastAPI, PostgreSQL, Redis (90%)\n• AI & Tools — OpenAI API, LangChain, TensorFlow, Docker, AWS (92%)\n\nI pick the right tool for the problem, not the trendiest one.',
   },
   {
-    keywords: ['project', 'portfolio', 'built', 'demo', 'case', 'work', 'loyiha', 'ishlar', 'проект', 'портфолио', 'работы'],
+    keywords: ['project', 'portfolio', 'built', 'demo', 'case', 'work', 'loyiha', 'ishlar', 'проект', 'портфолио', 'работы', 'sdk', 'action', 'bot', 'canvas'],
     response:
-      "Three flagship builds:\n\n1. API Explorer — FastAPI testing console with live request monitoring\n2. Health AI Medical System — ML-powered symptom triage platform\n3. Marketing Materials Generator — AI content studio that turns one brief into a full campaign\n\nClick any project card below to try an interactive demo.",
+      "Here are Jasper's 4 Flagship Production Projects:\n\n1. 💳 UzPayment SDK — Universal multi-provider Fintech SDK (Click, Payme, Uzum, Paynet) with 100% test coverage.\n2. 🤖 AI Code Reviewer & Security Auditor — Google Gemini AI GitHub Action for PR reviews and OWASP vulnerability scans.\n3. 🎨 CollabFlow AI Canvas — Real-time multiplayer whiteboard with Gemini AI text-to-architecture engine.\n4. 🎙️ Voice2Deal AI (@Ovozli_SavdoBOT) — Voice-driven Retail POS, Inventory & Debt Ledger SaaS bot.\n\nClick any project card on the page to inspect architecture, source code, and live demos!",
   },
   {
     keywords: ['price', 'cost', 'budget', 'estimate', 'rate', 'much', 'charge', 'fee', 'narx', 'byudjet', 'qancha', 'цена', 'стоимость', 'бюджет', 'сколько'],
