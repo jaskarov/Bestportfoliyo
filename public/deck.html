@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Javohirbek Asqarov (Jasper) — Portfolio & Presentation Deck</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #09090b;
+      color: #f4f4f5;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      touch-action: pan-y;
+      -webkit-font-smoothing: antialiased;
+    }
+    .font-mono { font-family: 'Fira Code', monospace; }
+    .slide-card {
+      background: #121215;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+    .slide-container {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .slide-page {
+      display: none;
+      width: 100%;
+      height: 100%;
+      max-width: 1400px;
+      max-height: 860px;
+      padding: 24px;
+      box-sizing: border-box;
+      flex-direction: column;
+      justify-content: space-between;
+      animation: fadeIn 0.25s ease-out;
+    }
+    .slide-page.active {
+      display: flex;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    /* Mobile responsive tweaks */
+    @media (max-width: 768px) {
+      .slide-page {
+        padding: 16px;
+        overflow-y: auto;
+        max-height: calc(100vh - 80px);
+      }
+      .mobile-grid-1 {
+        grid-template-columns: 1fr !important;
+      }
+      .mobile-text-lg {
+        font-size: 28px !important;
+      }
+      .mobile-hide {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="select-none">
+
+  <!-- TOP BAR -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800/80 px-4 py-2.5 flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <div class="w-7 h-7 rounded-lg bg-zinc-100 text-zinc-950 flex items-center justify-center font-bold text-xs">
+        JA
+      </div>
+      <div>
+        <span class="text-xs font-semibold text-zinc-100">Javohirbek Asqarov (Jasper)</span>
+        <span class="text-[10px] text-zinc-400 block sm:inline sm:ml-2">Full-Stack & AI Systems Architect</span>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <span id="slideCounter" class="text-xs font-mono px-2.5 py-1 rounded-md bg-zinc-900 border border-zinc-800 text-zinc-300">01 / 11</span>
+      <button onclick="prevSlide()" class="p-1.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 text-zinc-300 border border-zinc-800 active:scale-95">
+        <i data-lucide="chevron-left" class="w-4 h-4"></i>
+      </button>
+      <button onclick="nextSlide()" class="p-1.5 rounded-lg bg-zinc-100 hover:bg-zinc-200 text-zinc-950 font-bold active:scale-95">
+        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- BACKGROUND GLOWS -->
+  <div class="fixed -top-32 -right-32 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl pointer-events-none"></div>
+  <div class="fixed -bottom-32 -left-32 w-96 h-96 bg-emerald-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+  <!-- SLIDES WRAPPER -->
+  <div class="slide-container pt-12" id="swipeArea">
+
+    <!-- SLIDE 1: COVER -->
+    <div class="slide-page active" data-slide="1">
+      <div class="flex justify-between items-center text-xs">
+        <span class="text-zinc-500 uppercase tracking-widest font-mono">PORTFOLIO & EXECUTIVE DECK</span>
+        <span class="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-medium text-[11px]">● Available for Architecture & Advisory</span>
+      </div>
+
+      <div class="my-auto space-y-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-xs text-zinc-300">
+          <span class="w-2 h-2 rounded-full bg-violet-500"></span>
+          <span>AI Systems Engineer & Full-Stack Architect</span>
+        </div>
+        <h1 class="text-4xl sm:text-7xl font-extrabold tracking-tight text-white leading-tight">
+          Javohirbek Asqarov <br>
+          <span class="text-violet-400 text-2xl sm:text-4xl font-semibold">(Jasper)</span>
+        </h1>
+        <p class="text-base sm:text-2xl text-zinc-400 max-w-3xl leading-relaxed">
+          Building autonomous self-healing engines, high-concurrency SaaS infrastructures, and designer-grade digital products with zero-regression discipline.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div class="slide-card p-3.5">
+          <div class="text-[11px] text-zinc-500 font-medium">BUILDS</div>
+          <div class="text-xl sm:text-2xl font-bold text-white font-mono">47+ Projects</div>
+          <div class="text-[11px] text-zinc-400">Production SaaS & Bots</div>
+        </div>
+        <div class="slide-card p-3.5">
+          <div class="text-[11px] text-zinc-500 font-medium">EXPERTISE</div>
+          <div class="text-xl sm:text-2xl font-bold text-violet-400 font-mono">AI & SRE</div>
+          <div class="text-[11px] text-zinc-400">Autonomous Healing</div>
+        </div>
+        <div class="slide-card p-3.5">
+          <div class="text-[11px] text-zinc-500 font-medium">SLA BENCHMARK</div>
+          <div class="text-xl sm:text-2xl font-bold text-emerald-400 font-mono">99.98%</div>
+          <div class="text-[11px] text-zinc-400">High Reliability</div>
+        </div>
+        <div class="slide-card p-3.5">
+          <div class="text-[11px] text-zinc-500 font-medium">DESIGN SYSTEM</div>
+          <div class="text-xl sm:text-2xl font-bold text-white font-mono">shadcn/ui</div>
+          <div class="text-[11px] text-zinc-400">Zero Eye-Strain</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: PROFILE & MANIFESTO -->
+    <div class="slide-page" data-slide="2">
+      <div class="flex items-center gap-2 border-b border-zinc-800 pb-2 text-xs">
+        <span class="text-violet-400 font-bold">01. PROFILE</span>
+        <span class="text-zinc-600">/</span>
+        <span class="text-zinc-300 font-medium">Executive Profile & Core Principles</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-auto">
+        <div class="space-y-3">
+          <h2 class="text-2xl sm:text-4xl font-extrabold text-white leading-tight">
+            I architect systems that think, heal, and scale autonomously.
+          </h2>
+          <p class="text-sm sm:text-base text-zinc-400 leading-relaxed">
+            Over the past several years, I have engineered multi-tenant SaaS platforms, interactive canvas workspaces, Telegram mini-apps, and robust fintech payment gateways.
+          </p>
+          <div class="grid grid-cols-2 gap-2 pt-2">
+            <div class="slide-card p-3">
+              <span class="text-xs text-emerald-400 font-bold uppercase block">Speed & Precision</span>
+              <span class="text-xs text-zinc-300">Rapid prototyping to production deploy without technical debt.</span>
+            </div>
+            <div class="slide-card p-3">
+              <span class="text-xs text-violet-400 font-bold uppercase block">Design Engineering</span>
+              <span class="text-xs text-zinc-300">Pixel-accurate interfaces with WCAG AAA contrast & tactile physics.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <div class="slide-card p-3 flex gap-3 items-start">
+            <span class="text-violet-400 font-mono font-bold text-base">01</span>
+            <div>
+              <div class="text-xs font-bold text-white">Zero-Regression Standard</div>
+              <div class="text-[11px] text-zinc-400">Every endpoint and state machine is covered with 100% passing automated test suites.</div>
+            </div>
+          </div>
+          <div class="slide-card p-3 flex gap-3 items-start">
+            <span class="text-violet-400 font-mono font-bold text-base">02</span>
+            <div>
+              <div class="text-xs font-bold text-white">AI-First Observability & Self-Healing</div>
+              <div class="text-[11px] text-zinc-400">Systems don't just alert engineers—they diagnose stack traces, match Git diffs, and generate pull requests.</div>
+            </div>
+          </div>
+          <div class="slide-card p-3 flex gap-3 items-start">
+            <span class="text-violet-400 font-mono font-bold text-base">03</span>
+            <div>
+              <div class="text-xs font-bold text-white">Zero Secret Leakage Guarantee</div>
+              <div class="text-[11px] text-zinc-400">Strict cloud environment isolation and automated regex pre-commit audits on every push.</div>
+            </div>
+          </div>
+          <div class="slide-card p-3 flex gap-3 items-start">
+            <span class="text-violet-400 font-mono font-bold text-base">04</span>
+            <div>
+              <div class="text-xs font-bold text-white">Fintech-Grade Data Integrity</div>
+              <div class="text-[11px] text-zinc-400">Integer 100x tiyin/so'm conversion locks, HMAC signatures, and double-spending idempotency.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-[11px] text-zinc-500 border-t border-zinc-800 pt-2 flex justify-between">
+        <span>Tashkent, Uzbekistan</span>
+        <span class="font-mono">02 / 11</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: PULSEFIX -->
+    <div class="slide-page" data-slide="3">
+      <div class="flex items-center gap-2 border-b border-zinc-800 pb-2 text-xs">
+        <span class="text-emerald-400 font-bold">02. FLAGSHIP</span>
+        <span class="text-zinc-600">/</span>
+        <span class="text-zinc-300 font-medium">PulseFix — Autonomous Self-Healing SRE Engine</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-auto">
+        <div class="space-y-3">
+          <div class="flex gap-2">
+            <span class="px-2 py-0.5 rounded-full bg-violet-500/10 text-violet-400 border border-violet-500/20 text-[10px] font-bold">FASTAPI + GEMINI 2.5</span>
+            <span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-bold">OPEN SOURCE</span>
+          </div>
+          <h2 class="text-2xl sm:text-4xl font-extrabold text-white leading-tight">
+            Diagnoses 500s from Git diffs and creates GitHub fix PRs.
+          </h2>
+          <p class="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+            PulseFix transforms passive uptime monitoring into an active SRE. It intercepts 500 errors, analyzes stack traces against recent Git commit diffs, generates unified diff patches, and opens a GitHub Pull Request with instant Telegram alerts.
+          </p>
+          <div class="grid grid-cols-2 gap-2">
+            <div class="slide-card p-2.5">
+              <div class="text-[10px] text-zinc-500">PROBING SPEED</div>
+              <div class="text-base font-bold text-white font-mono">15–30s Async</div>
+            </div>
+            <div class="slide-card p-2.5">
+              <div class="text-[10px] text-zinc-500">RCA ACCURACY</div>
+              <div class="text-base font-bold text-emerald-400 font-mono">100% Fallback</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-card p-4 space-y-2 text-xs">
+          <span class="text-[11px] font-bold text-violet-400 uppercase tracking-wider block">Autonomous Resolution Workflow</span>
+          <div class="p-2 rounded-lg bg-zinc-950 border border-zinc-800 flex gap-2 items-center">
+            <span class="w-5 h-5 rounded-full bg-zinc-800 text-center font-bold text-white leading-5 text-[10px]">1</span>
+            <span><b>HTTP 500 Interception:</b> Prober captures traceback & payload</span>
+          </div>
+          <div class="p-2 rounded-lg bg-zinc-950 border border-zinc-800 flex gap-2 items-center">
+            <span class="w-5 h-5 rounded-full bg-zinc-800 text-center font-bold text-white leading-5 text-[10px]">2</span>
+            <span><b>Gemini SRE Analysis:</b> Maps traceback to recent Git commits</span>
+          </div>
+          <div class="p-2 rounded-lg bg-zinc-950 border border-zinc-800 flex gap-2 items-center">
+            <span class="w-5 h-5 rounded-full bg-zinc-800 text-center font-bold text-white leading-5 text-[10px]">3</span>
+            <span><b>Patch Synthesis:</b> Generates safe unified diff patch</span>
+          </div>
+          <div class="p-2 rounded-lg bg-zinc-950 border border-zinc-800 flex gap-2 items-center">
+            <span class="w-5 h-5 rounded-full bg-zinc-800 text-center font-bold text-white leading-5 text-[10px]">4</span>
+            <span><b>GitHub PR & Telegram:</b> Creates branch & alerts with 1-click merge</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-[11px] text-zinc-500 border-t border-zinc-800 pt-2 flex justify-between">
+        <span>github.com/salomh46-rgb/pulseapi-monitoring-saas</span>
+        <span class="font-mono">03 / 11</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 4: COLLABFLOW -->
+    <div class="slide-page" data-slide="4">
+      <div class="flex items-center gap-2 border-b border-zinc-800 pb-2 text-xs">
+        <span class="text-sky-400 font-bold">02. FLAGSHIP</span>
+        <span class="text-zinc-600">/</span>
+        <span class="text-zinc-300 font-medium">CollabFlow — Multi-Agent AI Canvas Platform</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-auto">
+        <div class="space-y-3">
+          <h2 class="text-2xl sm:text-4xl font-extrabold text-white leading-tight">
+            Infinite visual whiteboard for orchestrating AI agent swarms.
+          </h2>
+          <p class="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+            Engineers connect specialized autonomous agents via directed acyclic graphs (DAGs). Each node runs specialized LLMs that stream thought processes and generate deliverables collaboratively.
+          </p>
+          <div class="slide-card p-3 border-l-2 border-l-sky-500">
+            <span class="text-xs text-sky-400 font-bold block">Live WebSocket Sync</span>
+            <span class="text-xs text-zinc-300">Sub-20ms cursor synchronization, presence tracking, and distributed state management.</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2">
+          <div class="slide-card p-3">
+            <span class="text-[10px] text-sky-400 font-mono uppercase font-bold">DAG Execution</span>
+            <div class="text-xs font-bold text-white mt-1">Node-Based Flow</div>
+            <p class="text-[11px] text-zinc-400 mt-1">Topological sort, cycle detection, and parallel branch execution.</p>
+          </div>
+          <div class="slide-card p-3">
+            <span class="text-[10px] text-violet-400 font-mono uppercase font-bold">Swarm Memory</span>
+            <div class="text-xs font-bold text-white mt-1">Multi-Agent Swarm</div>
+            <p class="text-[11px] text-zinc-400 mt-1">Code Reviewer, Security Auditor, Test Writer, and UI Designer.</p>
+          </div>
+          <div class="slide-card p-3">
+            <span class="text-[10px] text-emerald-400 font-mono uppercase font-bold">Streaming</span>
+            <div class="text-xs font-bold text-white mt-1">Real-Time Tokens</div>
+            <p class="text-[11px] text-zinc-400 mt-1">Token-by-token thought output rendered onto canvas nodes.</p>
+          </div>
+          <div class="slide-card p-3">
+            <span class="text-[10px] text-amber-400 font-mono uppercase font-bold">Exportable</span>
+            <div class="text-xs font-bold text-white mt-1">CI/CD Ready</div>
+            <p class="text-[11px] text-zinc-400 mt-1">Export workflows directly to Python scripts or GitHub Actions.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-[11px] text-zinc-500 border-t border-zinc-800 pt-2 flex justify-between">
+        <span>Graph Computing & Multi-Agent Swarms</span>
+        <span class="font-mono">04 / 11</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 5: FINTECH -->
+    <div class="slide-page" data-slide="5">
+      <div class="flex items-center gap-2 border-b border-zinc-800 pb-2 text-xs">
+        <span class="text-emerald-400 font-bold">02. FLAGSHIP</span>
+        <span class="text-zinc-600">/</span>
+        <span class="text-zinc-300 font-medium">Fintech Infrastructure & UzPayment SDK</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-auto">
+        <div class="space-y-3">
+          <h2 class="text-2xl sm:text-4xl font-extrabold text-white leading-tight">
+            Enterprise multi-gateway payment core for Uzbekistan.
+          </h2>
+          <p class="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+            Unified, fault-tolerant payment drivers integrating Payme, Click, and Uzum into one idiomatic API, eliminating local financial integration errors.
+          </p>
+          <div class="grid grid-cols-3 gap-2">
+            <div class="slide-card p-2 text-center">
+              <div class="text-sm font-bold text-sky-400">Payme</div>
+              <div class="text-[10px] text-zinc-400">Merchant v2</div>
+            </div>
+            <div class="slide-card p-2 text-center">
+              <div class="text-sm font-bold text-emerald-400">Click</div>
+              <div class="text-[10px] text-zinc-400">Shop API</div>
+            </div>
+            <div class="slide-card p-2 text-center">
+              <div class="text-sm font-bold text-violet-400">Uzum</div>
+              <div class="text-[10px] text-zinc-400">Fast Checkout</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-card p-4 space-y-3 text-xs">
+          <span class="text-[11px] font-bold text-emerald-400 uppercase tracking-wider block">Security & Financial Calculation Pillars</span>
+          <div class="space-y-1">
+            <div class="font-bold text-white flex items-center gap-1.5"><span class="text-emerald-400">✓</span> 100x Tiyin / So'm Conversion Lock</div>
+            <p class="text-[11px] text-zinc-400">Every price is converted to integer tiyin (1 so'm = 100 tiyin) to prevent float roundoff leakage across millions of orders.</p>
+          </div>
+          <div class="space-y-1">
+            <div class="font-bold text-white flex items-center gap-1.5"><span class="text-emerald-400">✓</span> Idempotency & Concurrency Locks</div>
+            <p class="text-[11px] text-zinc-400">Row-locking and Redis tokens prevent double-spending under duplicate webhook triggers.</p>
+          </div>
+          <div class="space-y-1">
+            <div class="font-bold text-white flex items-center gap-1.5"><span class="text-emerald-400">✓</span> HMAC Webhook Verification</div>
+            <p class="text-[11px] text-zinc-400">Constant-time hash comparison verifies webhook legitimacy before updating database states.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-[11px] text-zinc-500 border-t border-zinc-800 pt-2 flex justify-between">
+        <span>Payment Gateway Engineering</span>
+        <span class="font-mono">05 / 11</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 6: DENTAMED -->
+    <div class="slide-page" data-slide="6">
+      <div class="flex items-center gap-2 border-b border-zinc-800 pb-2 text-xs">
+        <span class="text-violet-400 font-bold">02. FLAGSHIP</span>
+        <span class="text-zinc-600">/</span>
+        <span class="text-zinc-300 font-medium">DentaMed Atelier — Healthcare Telegram Mini App</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-auto">
+        <div class="space-y-3">
+          <h2 class="text-2xl sm:text-4xl font-extrabold text-white leading-tight">
+            Clinic automation with interactive 32-tooth jaw mapping.
+          </h2>
+          <p class="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+            A full-stack ecosystem for medical clinics. Features an ultra-responsive Telegram WebApp, doctor booking schedule, dynamic pricing calculator, and admin CRM with zero latency.
+          </p>
+          <div class="grid grid-cols-2 gap-2">
+            <div class="slide-card p-2.5">
+              <div class="text-lg font-bold text-violet-400 font-mono">32 Teeth</div>
+              <div class="text-[10px] text-zinc-400">Interactive SVG dental jaw map</div>
+            </div>
+            <div class="slide-card p-2.5">
+              <div class="text-lg font-bold text-emerald-400 font-mono">Native WebApp</div>
+              <div class="text-[10px] text-zinc-400">Haptics, Telegram theme sync</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-2 text-xs">
+          <div class="slide-card p-3">
+            <div class="font-bold text-white">Zero-Z-Index Viewport Tooltips</div>
+            <div class="text-[11px] text-zinc-400">Tooltips detached from SVG hierarchy to prevent mobile viewport clipping.</div>
+          </div>
+          <div class="slide-card p-3">
+            <div class="font-bold text-white">Asynchronous State Protection</div>
+            <div class="text-[11px] text-zinc-400">8-second safety timeouts with finally-blocks ensure booking buttons never freeze in loading.</div>
+          </div>
+          <div class="slide-card p-3">
+            <div class="font-bold text-white">Automated Doctor Paging</div>
+            <div class="text-[11px] text-zinc-400">Instant alerts sent to doctors with patient notes and scheduled time.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-[11px] text-zinc-500 border-t border-zinc-800 pt-2 flex justify-between">
+        <span>Telegram Mini App & Medical CRM</span>
+        <span class="font-mono">06 / 11</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 7: VOICE AI -->
+    <div class="slide-page" data-slide="7">
+      <div class="flex items-center gap-2 border-b border-zinc-800 pb-2 text-xs">
+        <span class="text-violet-400 font-bold">02. FLAGSHIP</span>
+        <span class="text-zinc-600">/</span>
+        <span class="text-zinc-300 font-medium">Hamroh Bot & Voice2Deal — Voice & AI Companions</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-auto">
+        <div class="slide-card p-4 space-y-2">
+          <span class="px-2 py-0.5 rounded-full bg-violet-500/10 text-violet-400 border border-violet-500/20 text-[10px] font-bold">VIRTUAL COMPANION</span>
+          <h3 class="text-lg sm:text-xl font-bold text-white">Hamroh Bot: Smart AI Companion</h3>
+          <p class="text-xs text-zinc-400">Designed for elderly and children with daily medication reminders and SOS emergency 103 protocol.</p>
+          <div class="space-y-1 text-xs text-zinc-300 pt-1">
+            <div><span class="text-emerald-400">✓</span> Uzbek phonetic tuning (g', o', sh, ch)</div>
+            <div><span class="text-emerald-400">✓</span> Anti-flood middleware preventing spam</div>
+            <div><span class="text-emerald-400">✓</span> In-memory BytesIO audio streaming</div>
+          </div>
+        </div>
+
+        <div class="slide-card p-4 space-y-2">
+          <span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-bold">SALES INTELLIGENCE</span>
+          <h3 class="text-lg sm:text-xl font-bold text-white">Voice2Deal: Conversational Sales AI</h3>
+          <p class="text-xs text-zinc-400">Converts casual Telegram voice messages into structured CRM leads, extracts buyer intent, and closes transactions.</p>
+          <div class="space-y-1 text-xs text-zinc-300 pt-1">
+            <div><span class="text-violet-400">✓</span> Real-time parsing of quantities & delivery</div>
+            <div><span class="text-violet-400">✓</span> Instant sync to Sheets, Notion & Postgres</div>
+            <div><span class="text-violet-400">✓</span> Sub-second edge-accelerated LLM pipeline</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-[11px] text-zinc-500 border-t border-zinc-800 pt-2 flex justify-between">
+        <span>Voice Synthesis & NLP Commerce</span>
+        <span class="font-mono">07 / 11</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 8: TECH MATRIX -->
+    <div class="slide-page" data-slide="8">
+      <div class="flex items-center gap-2 border-b border-zinc-800 pb-2 text-xs">
+        <span class="text-sky-400 font-bold">03. ARSENAL</span>
+        <span class="text-zinc-600">/</span>
+        <span class="text-zinc-300 font-medium">Technical Arsenal & Production Stack</span>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 my-auto">
+        <div class="slide-card p-3 space-y-2">
+          <span class="text-xs font-bold text-violet-400 uppercase">AI & LLM</span>
+          <div class="space-y-1 text-xs text-zinc-300">
+            <div class="p-1.5 rounded bg-zinc-950">Gemini 2.5 Flash / Pro</div>
+            <div class="p-1.5 rounded bg-zinc-950">Ollama Local LLMs</div>
+            <div class="p-1.5 rounded bg-zinc-950">LangChain & Workflows</div>
+            <div class="p-1.5 rounded bg-zinc-950">Multi-Agent Swarms</div>
+          </div>
+        </div>
+        <div class="slide-card p-3 space-y-2">
+          <span class="text-xs font-bold text-emerald-400 uppercase">BACKEND & SRE</span>
+          <div class="space-y-1 text-xs text-zinc-300">
+            <div class="p-1.5 rounded bg-zinc-950">Python (FastAPI, Async)</div>
+            <div class="p-1.5 rounded bg-zinc-950">Node.js & TypeScript</div>
+            <div class="p-1.5 rounded bg-zinc-950">PostgreSQL & Supabase</div>
+            <div class="p-1.5 rounded bg-zinc-950">SQLite & Redis Locks</div>
+          </div>
+        </div>
+        <div class="slide-card p-3 space-y-2">
+          <span class="text-xs font-bold text-sky-400 uppercase">FRONTEND</span>
+          <div class="space-y-1 text-xs text-zinc-300">
+            <div class="p-1.5 rounded bg-zinc-950">React & Vite</div>
+            <div class="p-1.5 rounded bg-zinc-950">Next.js 14+ App Router</div>
+            <div class="p-1.5 rounded bg-zinc-950">shadcn/ui & Radix</div>
+            <div class="p-1.5 rounded bg-zinc-950">Tailwind & Chart.js</div>
+          </div>
+        </div>
+        <div class="slide-card p-3 space-y-2">
+          <span class="text-xs font-bold text-amber-400 uppercase">CLOUD & DEVOPS</span>
+          <div class="space-y-1 text-xs text-zinc-300">
+            <div class="p-1.5 rounded bg-zinc-950">Docker Containers</div>
+            <div class="p-1.5 rounded bg-zinc-950">Telegram Bot APIs</div>
+            <div class="p-1.5 rounded bg-zinc-950">Vercel & Cloud Deploy</div>
+            <div class="p-1.5 rounded bg-zinc-950">Pre-Commit Security</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-[11px] text-zinc-500 border-t border-zinc-800 pt-2 flex justify-between">
+        <span>Production Grade Stack</span>
+        <span class="font-mono">08 / 11</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 9: 7 PILLARS -->
+    <div class="slide-page" data-slide="9">
+      <div class="flex items-center gap-2 border-b border-zinc-800 pb-2 text-xs">
+        <span class="text-violet-400 font-bold">04. QUALITY</span>
+        <span class="text-zinc-600">/</span>
+        <span class="text-zinc-300 font-medium">The 7 Pillars of Jasper Engineering Standards</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 my-auto">
+        <div class="slide-card p-2.5">
+          <div class="text-xs font-bold text-white">1. SaaS Architecture</div>
+          <div class="text-[11px] text-zinc-400">Relative /api URLs, server-side tier enforcement, Tashkent timezone.</div>
+        </div>
+        <div class="slide-card p-2.5">
+          <div class="text-xs font-bold text-white">2. Elite Portfolios</div>
+          <div class="text-[11px] text-zinc-400">Glassmorphism, live interactive sandboxes, zero layout shift (CLS).</div>
+        </div>
+        <div class="slide-card p-2.5">
+          <div class="text-xs font-bold text-white">3. Telegram Mini Apps</div>
+          <div class="text-[11px] text-zinc-400">Viewport-space tooltips, async safety timeouts with finally-blocks.</div>
+        </div>
+        <div class="slide-card p-2.5">
+          <div class="text-xs font-bold text-white">4. Fintech Precision</div>
+          <div class="text-[11px] text-zinc-400">100x tiyin integer calculations, idempotency locks, HMAC validation.</div>
+        </div>
+        <div class="slide-card p-2.5">
+          <div class="text-xs font-bold text-white">5. Windows & Docker</div>
+          <div class="text-[11px] text-zinc-400">UTF-8 BOM-less files, Python 3.11 backward compatibility, clean ports.</div>
+        </div>
+        <div class="slide-card p-2.5">
+          <div class="text-xs font-bold text-white">6. Complete Delivery</div>
+          <div class="text-[11px] text-zinc-400">Mermaid architecture, badges, ROI metrics, 100% test coverage.</div>
+        </div>
+        <div class="slide-card p-3 sm:col-span-3 bg-violet-950/20 border-violet-500/30 flex justify-between items-center">
+          <div>
+            <div class="text-xs font-bold text-violet-300">Pillar 7: Absolute Zero-Secret-Leakage Protocol</div>
+            <div class="text-[11px] text-zinc-400">Automated regex pre-commit scan for tokens & platform isolation.</div>
+          </div>
+          <span class="text-[10px] font-mono text-violet-400 px-2 py-0.5 rounded bg-zinc-900 border border-violet-500/30">ENFORCED</span>
+        </div>
+      </div>
+
+      <div class="text-[11px] text-zinc-500 border-t border-zinc-800 pt-2 flex justify-between">
+        <span>Zero-Regression Standards</span>
+        <span class="font-mono">09 / 11</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 10: ROI & IMPACT -->
+    <div class="slide-page" data-slide="10">
+      <div class="flex items-center gap-2 border-b border-zinc-800 pb-2 text-xs">
+        <span class="text-emerald-400 font-bold">05. VALUE</span>
+        <span class="text-zinc-600">/</span>
+        <span class="text-zinc-300 font-medium">Business Impact & Measurable ROI</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-auto">
+        <div class="space-y-3">
+          <h2 class="text-2xl sm:text-4xl font-extrabold text-white leading-tight">
+            Engineering measured in revenue, saved hours, and zero downtime.
+          </h2>
+          <div class="grid grid-cols-2 gap-2">
+            <div class="slide-card p-3">
+              <div class="text-2xl sm:text-3xl font-bold text-emerald-400 font-mono">-85%</div>
+              <div class="text-xs font-bold text-white">MTTR Reduction</div>
+              <div class="text-[11px] text-zinc-400">Incident fix drops from 45m to <3m via PulseFix.</div>
+            </div>
+            <div class="slide-card p-3">
+              <div class="text-2xl sm:text-3xl font-bold text-violet-400 font-mono">3.5x</div>
+              <div class="text-xs font-bold text-white">Conversion Velocity</div>
+              <div class="text-[11px] text-zinc-400">Mini Apps convert 350% faster than forms.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-card p-4 space-y-2 text-xs">
+          <span class="text-emerald-400 font-bold uppercase block text-[11px]">Why Founders & CTOs Choose Jasper</span>
+          <div class="space-y-0.5">
+            <div class="font-bold text-white">End-to-End Ownership</div>
+            <div class="text-zinc-400 text-[11px]">From UX design in Figma to backend FastAPI, database tuning, and production CI/CD.</div>
+          </div>
+          <div class="space-y-0.5">
+            <div class="font-bold text-white">AI Swarm Acceleration</div>
+            <div class="text-zinc-400 text-[11px]">Orchestrations of specialized subagents deliver complex software 5x faster than typical teams.</div>
+          </div>
+          <div class="space-y-0.5">
+            <div class="font-bold text-white">Commercial Mindset</div>
+            <div class="text-zinc-400 text-[11px]">Deep understanding of CAC, LTV, conversion funnels, and payment economics.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-[11px] text-zinc-500 border-t border-zinc-800 pt-2 flex justify-between">
+        <span>Measurable Engineering Value</span>
+        <span class="font-mono">10 / 11</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 11: CLOSING -->
+    <div class="slide-page" data-slide="11">
+      <div class="flex items-center gap-2 border-b border-zinc-800 pb-2 text-xs">
+        <span class="text-violet-400 font-bold">06. CONTACT</span>
+        <span class="text-zinc-600">/</span>
+        <span class="text-zinc-300 font-medium">Let's Build Something Exceptional</span>
+      </div>
+
+      <div class="text-center my-auto space-y-4 max-w-2xl mx-auto">
+        <span class="px-3 py-1 rounded-full bg-violet-500/10 text-violet-400 border border-violet-500/20 text-xs font-bold">COLLABORATION & ADVISORY</span>
+        <h2 class="text-3xl sm:text-5xl font-extrabold text-white leading-tight">
+          Ready to take your product from concept to high-scale reality?
+        </h2>
+        <p class="text-xs sm:text-sm text-zinc-400">
+          Open for high-impact AI systems architecture, full-stack SaaS builds, Telegram Mini App ecosystems, and fintech consulting.
+        </p>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2">
+          <a href="https://t.me/Dr_eviluz" target="_blank" class="slide-card p-2.5 text-left hover:border-sky-500/40 transition-colors">
+            <div class="text-[10px] text-sky-400 font-bold">TELEGRAM</div>
+            <div class="text-xs text-white font-mono">@Dr_eviluz</div>
+          </a>
+          <a href="https://github.com/salomh46-rgb" target="_blank" class="slide-card p-2.5 text-left hover:border-violet-500/40 transition-colors">
+            <div class="text-[10px] text-violet-400 font-bold">GITHUB</div>
+            <div class="text-xs text-white font-mono">salomh46-rgb</div>
+          </a>
+          <a href="https://bestportfoliyo-o4z2.vercel.app/" target="_blank" class="slide-card p-2.5 text-left hover:border-emerald-500/40 transition-colors">
+            <div class="text-[10px] text-emerald-400 font-bold">PORTFOLIO</div>
+            <div class="text-xs text-white font-mono">bestportfoliyo</div>
+          </a>
+          <a href="mailto:salomh46@gmail.com" class="slide-card p-2.5 text-left hover:border-amber-500/40 transition-colors">
+            <div class="text-[10px] text-amber-400 font-bold">EMAIL</div>
+            <div class="text-xs text-white font-mono">salomh46@..</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="text-[11px] text-zinc-500 border-t border-zinc-800 pt-2 flex justify-between">
+        <span>Tashkent, Uzbekistan · 2026</span>
+        <span class="font-mono">11 / 11</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BOTTOM MOBILE CONTROLS -->
+  <div class="fixed bottom-3 left-0 right-0 z-50 flex justify-center items-center gap-3 pointer-events-none">
+    <div class="pointer-events-auto bg-zinc-900/90 backdrop-blur-md border border-zinc-800 rounded-full px-4 py-1.5 flex items-center gap-3 shadow-lg">
+      <button onclick="prevSlide()" class="text-xs text-zinc-400 hover:text-white font-medium flex items-center gap-1">
+        <i data-lucide="chevron-left" class="w-3.5 h-3.5"></i> Oldingi
+      </button>
+      <span class="w-1 h-1 rounded-full bg-zinc-700"></span>
+      <button onclick="nextSlide()" class="text-xs text-emerald-400 hover:text-emerald-300 font-bold flex items-center gap-1">
+        Keyingi <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    lucide.createIcons();
+
+    let currentSlide = 1;
+    const totalSlides = 11;
+
+    function showSlide(n) {
+      if (n < 1) n = 1;
+      if (n > totalSlides) n = totalSlides;
+      currentSlide = n;
+
+      document.querySelectorAll('.slide-page').forEach(page => {
+        page.classList.remove('active');
+        if (parseInt(page.getAttribute('data-slide')) === currentSlide) {
+          page.classList.add('active');
+        }
+      });
+
+      document.getElementById('slideCounter').innerText = `${String(currentSlide).padStart(2, '0')} / ${String(totalSlides).padStart(2, '0')}`;
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) showSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) showSlide(currentSlide - 1);
+    }
+
+    // Keyboard support
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') nextSlide();
+      if (e.key === 'ArrowLeft' || e.key === 'PageUp') prevSlide();
+    });
+
+    // Touch swipe support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const swipeArea = document.getElementById('swipeArea');
+
+    swipeArea.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    swipeArea.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      if (touchStartX - touchEndX > 50) nextSlide();
+      if (touchEndX - touchStartX > 50) prevSlide();
+    }, { passive: true });
+  </script>
+</body>
+</html>
