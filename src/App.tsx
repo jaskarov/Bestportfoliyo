@@ -45,7 +45,6 @@ import { UISoundEngine } from './components/UISoundEngine';
 import { AutoTranslator, type Language } from './localization';
 import { sendLead } from './utils/leadCapture';
 import { CircadianAtmosphere } from './components/CircadianAtmosphere';
-import { KineticDecryptionText } from './components/KineticDecryptionText';
 import { SpatialTiltCard } from './components/SpatialTiltCard';
 import { PCBTraceBorder } from './components/PCBTraceBorder';
 import { AscentLenisProvider } from './components/AscentLenisProvider';
@@ -710,9 +709,9 @@ const ProjectShowcaseSection = ({ onOpenProject }: { onOpenProject: (p: Project)
             Featured Work
           </span>
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">
-            <KineticDecryptionText text="PROJECT" speed={30} delay={100} />{' '}
+            Project{' '}
             <span className="text-gradient-gold">
-              <KineticDecryptionText text="SHOWCASE" speed={30} delay={250} />
+              Showcase
             </span>
           </h2>
           <p className="text-white/40 max-w-xl mx-auto">

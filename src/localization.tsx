@@ -13,8 +13,20 @@ const UZ: TranslationTable = {
   'Book a free 15-minute discovery call': 'Bepul 15 daqiqalik tanishuv qo\'ng\'irog\'i band qiling',
   'Prefer to talk it through?': 'Batafsil gaplashishni ma\'qul ko\'rasizmi?',
   'Explore Work': 'Ishlarni ko\'rish',
+  'Explore Masterworks': 'Asosiy ishlarni ko\'rish',
+  'Schedule Discovery Session': 'Tanishuv uchrashuvini belgilash',
   'Book 15-min Discovery Call': '15 daqiqalik tanishuv qo\'ng\'irog\'i',
   'Book a 15-min Discovery Call': '15 daqiqalik tanishuv qo\'ng\'irog\'i band qilish',
+  'TASHKENT (UTC+5) · ARCHITECTING ENTERPRISE AI & SYSTEMS':
+    'TOSHKENT (UTC+5) · KORPORATIV AI VA TIZIMLAR ARXITEKTORI',
+  ACTIVE: 'FAOL',
+  'DRAG 3D ARTIFACT TO ROTATE': 'AYLANTIRISH UCHUN 3D ARTEFAKTNI SURING',
+  'Multi-Agent Swarms': 'Ko\'p agentli tizimlar',
+  'Fintech & Payments': 'Fintex va to\'lovlar',
+  'Senior Full-Stack & AI Systems Architect':
+    'Senior Full-Stack va AI tizimlar arxitektori',
+  'Engineering zero-compromise distributed architectures, high-throughput fintech pipelines, and autonomous AI swarms with extreme aesthetic precision.':
+    'Murosasiz taqsimlangan arxitekturalar, yuqori yuklamali fintex quvurlari va avtonom AI agentlar to\'dasini yuksak estetik aniqlikda yarataman.',
   // Navigation and hero
   'Quest Map': 'Karyera yo\'li',
   Skills: 'Ko\'nikmalar',
@@ -31,6 +43,68 @@ const UZ: TranslationTable = {
   'Senior Full-Stack & AI Engineer': 'Senior Full-Stack va AI muhandis',
   'Architecting intelligent digital experiences at the intersection of cutting-edge web technologies and artificial intelligence.':
     'Ilg\'or veb-texnologiyalar va sun\'iy intellekt kesishmasida aqlli raqamli mahsulotlar yarataman.',
+
+  // Journey additions
+  'Independent Consultant / Product Engineering': 'Mustaqil maslahatchi / Mahsulot muhandisligi',
+  'Building product-facing web applications, automation flows, and AI-enabled business tools that solve real operational bottlenecks for clients and startups.':
+    'Mijozlar va startaplar uchun operatsion to\'siqlarni hal qiluvchi veb-ilovalar, avtomatlashtirish oqimlari va AI vositalarini yarataman.',
+  'Digital Product Studio': 'Raqamli mahsulotlar studiyasi',
+  'Delivered web platforms, dashboards, and internal tools using React, Node.js, and backend integrations for business and customer workflows.':
+    'Biznes jarayonlari uchun React, Node.js va backend integratsiyalari asosida veb-platformalar, boshqaruv panellari va ichki vositalar yaratdim.',
+  'University Studies': 'Universitet ta\'limi',
+  'Focused on software engineering, algorithms, data structures, and modern application architecture with practical product implementation.':
+    'Dasturiy ta\'minot muhandisligi, algoritmlar, ma\'lumotlar tuzilmasi va zamonaviy arxitektura bo\'yicha amaliy mahsulot yo\'nalishida tahsil oldim.',
+
+  // Project Showcase additions
+  'Project Showcase': 'Loyiha namunalari',
+  PROJECT: 'Loyiha',
+  SHOWCASE: 'namunalari',
+  'UzPayment Multi-Provider SDK': 'UzPayment Multi-Provider SDK',
+  'Fintech & Payment Infrastructure': 'Fintex va to\'lov infratuzilmasi',
+  'Universal, zero-dependency Node.js/TypeScript SDK integrating Click, Payme, Uzum Bank, and Paynet with strict HMAC security.':
+    'Click, Payme, Uzum Bank va Paynet tizimlarini qat\'iy HMAC xavfsizligi bilan birlashtiruvchi universal Node.js/TypeScript SDK.',
+  'UzPayment SDK is an enterprise-grade payment aggregation library built for Uzbekistan fintech ecosystems. It standardizes disparate provider protocols (JSON-RPC, REST, Form-POST) into a single strongly-typed interface with automated signature generation, webhook verification, and state machine transaction handling.':
+    'UzPayment SDK — O\'zbekiston fintex ekotizimi uchun mo\'ljallangan korporativ to\'lov kutubxonasi. U turli provayderlar protokollarini (JSON-RPC, REST, Form-POST) avtomatik imzo generatsiyasi, veb-huk tekshiruvi va tranzaksiyalar holat mashinasi bilan yagona qat\'iy tiplangan interfeysga birlashtiradi.',
+  'Single API for Click, Payme, Uzum Bank & Paynet': 'Click, Payme, Uzum Bank va Paynet uchun yagona API',
+  'Zero external runtime dependencies (native crypto)': 'Tashqi runtime bog\'liqliklarsiz (toza nativ crypto)',
+  '100% Unit Test coverage with Jest': 'Jest bilan 100% Unit test qamrovi',
+  'Automated signature generation and webhook verification': 'Avtomatlashtirilgan imzo generatsiyasi va vebhuk tekshiruvi',
+  'Idempotency & state machine transaction recovery': 'Idempotentlik va tranzaksiyalarni tiklash holat mashinasi',
+  'Strict TypeScript type definitions & ready-to-use Express middleware': 'Qat\'iy TypeScript tiplari va tayyor Express middleware',
+  'Test Coverage': 'Test qamrovi',
+  Providers: 'Provayderlar',
+  'Latency Overhead': 'Kechikish yuklamasi',
+
+  'AI Code Reviewer & Security Auditor': 'AI Code Reviewer va xavfsizlik auditori',
+  'AI Agents & DevOps CI/CD': 'AI agentlar va DevOps CI/CD',
+  'Google Gemini 1.5 Flash powered GitHub Action that automatically reviews Pull Requests, identifies OWASP vulnerabilities, and estimates latency.':
+    'Pull Request-larni avtomatik ko\'rib chiquvchi, OWASP zaifliklarini aniqlovchi va kechikishni baholovchi Google Gemini asosidagi GitHub Action.',
+  'An autonomous AI Code Reviewer action integrated into GitHub CI/CD pipelines. It parses git diffs, analyzes code against OWASP Top 10 vulnerabilities (SQLi, XSS, Secret Leaks, Insecure Deserialization), and posts formatted markdown feedback with line-by-line fix suggestions and complexity assessments.':
+    'GitHub CI/CD quvurlariga integratsiya qilingan avtonom AI Code Reviewer harakati. U git diff-larni tahlil qiladi, OWASP Top 10 zaifliklarini (SQLi, XSS, maxfiy kalitlar sizishi) tekshiradi va qatorlar bo\'yicha tuzatish tavsiyalari bilan markdown sharhlar qoldiradi.',
+  'Automated Pull Request inline commentary & summary': 'Avtomatik Pull Request qatorli sharhlari va xulosasi',
+  'OWASP Top 10 & CWE security vulnerability scanning': 'OWASP Top 10 va CWE xavfsizlik zaifliklarini skanerlash',
+  'Algorithmic time/space complexity analysis (Big-O)': 'Algoritmik vaqt va xotira murakkabligi tahlili (Big-O)',
+  'Secret and token leakage detection before merge': 'Birlashtirishdan oldin maxfiy kalitlar va tokenlar sizishini aniqlash',
+  'GitHub Action runner with intelligent token budgeting': 'Tokenlarni tejamkor rejalashtiruvchi GitHub Action runner',
+  'Zero-leakage secret handling adhering to GitHub security standards': 'GitHub xavfsizlik standartlariga mos nol-sizish tamoyili',
+  'Review Speed': 'Tahlil tezligi',
+  'OWASP Scans': 'OWASP tekshiruvi',
+  'Dev Time Saved': 'Tejalgan vaqt',
+
+  'CollabFlow AI Canvas': 'CollabFlow AI Canvas',
+  'Real-Time WebSockets & Generative UI': 'Real vaqtli WebSocket-lar va Generativ UI',
+  'Multiplayer collaborative infinite canvas with live cursor syncing and Google Gemini AI text-to-system architecture generator.':
+    'Kursorlarni jonli sinxronlashtiruvchi cheksiz hamkorlik kanvasi va Google Gemini AI matndan-arxitektura generatori.',
+  'CollabFlow AI is a real-time collaborative workspace engineered with Next.js 14, WebSockets, HTML5 Canvas, and Gemini AI. Distributed engineering teams can brainstorm, draw diagrams, track peer cursors in sub-50ms latency, and generate complete microservice architectures from simple natural language prompts.':
+    'CollabFlow AI — Next.js 14, WebSockets, HTML5 Canvas va Gemini AI yordamida yaratilgan real vaqtli hamkorlik muhiti. Jamoalar birgalikda diagrammalar chizishi, 50ms dan kam kechikishda kursorlarni kuzatishi va tabiiy tildagi so\'rovlardan to\'liq mikroservis arxitekturalarini yaratishi mumkin.',
+  'Sub-50ms multiplayer cursor and object synchronization': '50ms dan kam kechikishda kursor va ob\'ektlar sinxronizatsiyasi',
+  'Natural Language to Architecture Diagrammer powered by Gemini AI': 'Gemini AI asosidagi matndan arxitektura diagrammasini yaratuvchi tizim',
+  'Infinite zoom, pan, freehand drawing and smart geometric shapes': 'Cheksiz masshtablash, erkin chizish va aqlli geometrik shakllar',
+  'Room-based WebSocket architecture with heartbeat reconnection': 'Xonalarga asoslangan WebSocket arxitekturasi va qayta ulanish mexanizmi',
+  'Export to SVG, High-Res PNG, and JSON schema': 'SVG, yuqori sifatli PNG va JSON sxemaga eksport qilish',
+  'Optimistic UI state management with conflict resolution': 'Ziddiyatlarni bartaraf etuvchi optimistik UI holat boshqaruvi',
+  'Sync Latency': 'Sinxronlash kechikishi',
+  'AI Gen Time': 'AI generatsiya vaqti',
 
   // Journey
   'Career Journey': 'Karyera yo\'li',
@@ -332,8 +406,20 @@ const RU: TranslationTable = {
   'Book a free 15-minute discovery call': 'Забронируйте бесплатный 15-минутный звонок',
   'Prefer to talk it through?': 'Предпочитаете обсудить голосом?',
   'Explore Work': 'Смотреть работы',
+  'Explore Masterworks': 'Исследовать проекты',
+  'Schedule Discovery Session': 'Запланировать встречу',
   'Book 15-min Discovery Call': '15-мин ознакомительный звонок',
   'Book a 15-min Discovery Call': 'Забронировать 15-мин звонок',
+  'TASHKENT (UTC+5) · ARCHITECTING ENTERPRISE AI & SYSTEMS':
+    'ТАШКЕНТ (UTC+5) · АРХИТЕКТУРА КОРПОРАТИВНОГО AI И СИСТЕМ',
+  ACTIVE: 'АКТИВЕН',
+  'DRAG 3D ARTIFACT TO ROTATE': 'ВРАЩАЙТЕ 3D-АРТЕФАКТ МЫШЬЮ',
+  'Multi-Agent Swarms': 'Мультиагентные системы',
+  'Fintech & Payments': 'Финтех и платежи',
+  'Senior Full-Stack & AI Systems Architect':
+    'Senior Full-Stack и архитектор AI-систем',
+  'Engineering zero-compromise distributed architectures, high-throughput fintech pipelines, and autonomous AI swarms with extreme aesthetic precision.':
+    'Проектирование бескомпромиссных распределенных архитектур, высоконагруженных финтех-систем и автономных AI-агентов с высочайшей эстетической точностью.',
   // Navigation and hero
   'Quest Map': 'Путь карьеры',
   Skills: 'Навыки',
@@ -350,6 +436,68 @@ const RU: TranslationTable = {
   'Senior Full-Stack & AI Engineer': 'Senior Full-Stack и AI-инженер',
   'Architecting intelligent digital experiences at the intersection of cutting-edge web technologies and artificial intelligence.':
     'Создаю интеллектуальные цифровые продукты на пересечении современных веб-технологий и искусственного интеллекта.',
+
+  // Journey additions
+  'Independent Consultant / Product Engineering': 'Независимый консультант / Product Engineering',
+  'Building product-facing web applications, automation flows, and AI-enabled business tools that solve real operational bottlenecks for clients and startups.':
+    'Разработка веб-приложений, процессов автоматизации и AI-инструментов, устраняющих реальные операционные барьеры для бизнеса.',
+  'Digital Product Studio': 'Студия цифровых продуктов',
+  'Delivered web platforms, dashboards, and internal tools using React, Node.js, and backend integrations for business and customer workflows.':
+    'Разработка веб-платформ, дашбордов и внутренних сервисов на React, Node.js и серверных интеграциях.',
+  'University Studies': 'Университетское образование',
+  'Focused on software engineering, algorithms, data structures, and modern application architecture with practical product implementation.':
+    'Изучение программной инженерии, алгоритмов, структур данных и современной архитектуры с практической реализацией.',
+
+  // Project Showcase additions
+  'Project Showcase': 'Витрина проектов',
+  PROJECT: 'Проекты',
+  SHOWCASE: 'Витрина',
+  'UzPayment Multi-Provider SDK': 'UzPayment Multi-Provider SDK',
+  'Fintech & Payment Infrastructure': 'Финтех и платежная инфраструктура',
+  'Universal, zero-dependency Node.js/TypeScript SDK integrating Click, Payme, Uzum Bank, and Paynet with strict HMAC security.':
+    'Универсальный Node.js/TypeScript SDK для интеграции Click, Payme, Uzum Bank и Paynet со строгой безопасностью HMAC.',
+  'UzPayment SDK is an enterprise-grade payment aggregation library built for Uzbekistan fintech ecosystems. It standardizes disparate provider protocols (JSON-RPC, REST, Form-POST) into a single strongly-typed interface with automated signature generation, webhook verification, and state machine transaction handling.':
+    'UzPayment SDK — корпоративная библиотека агрегации платежей для финтех-экосистемы Узбекистана. Она стандартизирует протоколы провайдеров (JSON-RPC, REST, Form-POST) в единый строго типизированный интерфейс с автоматической генерацией подписей и проверкой вебхуков.',
+  'Single API for Click, Payme, Uzum Bank & Paynet': 'Единый API для Click, Payme, Uzum Bank и Paynet',
+  'Zero external runtime dependencies (native crypto)': 'Ноль внешних runtime-зависимостей (нативный crypto)',
+  '100% Unit Test coverage with Jest': '100% покрытие юнит-тестами с Jest',
+  'Automated signature generation and webhook verification': 'Автоматическая генерация подписей и верификация вебхуков',
+  'Idempotency & state machine transaction recovery': 'Идемпотентность и восстановление транзакций через стейт-машину',
+  'Strict TypeScript type definitions & ready-to-use Express middleware': 'Строгие типы TypeScript и готовое Express middleware',
+  'Test Coverage': 'Покрытие тестами',
+  Providers: 'Провайдеры',
+  'Latency Overhead': 'Задержка',
+
+  'AI Code Reviewer & Security Auditor': 'AI Code Reviewer и аудит безопасности',
+  'AI Agents & DevOps CI/CD': 'AI-агенты и DevOps CI/CD',
+  'Google Gemini 1.5 Flash powered GitHub Action that automatically reviews Pull Requests, identifies OWASP vulnerabilities, and estimates latency.':
+    'GitHub Action на базе Google Gemini, автоматически проверяющий Pull Request-ы, выявляющий уязвимости OWASP и оценивающий задержки.',
+  'An autonomous AI Code Reviewer action integrated into GitHub CI/CD pipelines. It parses git diffs, analyzes code against OWASP Top 10 vulnerabilities (SQLi, XSS, Secret Leaks, Insecure Deserialization), and posts formatted markdown feedback with line-by-line fix suggestions and complexity assessments.':
+    'Автономный AI Code Reviewer для GitHub CI/CD пайплайнов. Парсит git diff, проверяет код на уязвимости OWASP Top 10 (SQLi, XSS, утечки секретов) и оставляет построчные рекомендации по исправлению.',
+  'Automated Pull Request inline commentary & summary': 'Автоматические построчные комментарии и сводка PR',
+  'OWASP Top 10 & CWE security vulnerability scanning': 'Сканирование уязвимостей безопасности OWASP Top 10 и CWE',
+  'Algorithmic time/space complexity analysis (Big-O)': 'Анализ алгоритмической сложности по времени и памяти (Big-O)',
+  'Secret and token leakage detection before merge': 'Обнаружение утечек секретов и токенов до мерджа',
+  'GitHub Action runner with intelligent token budgeting': 'GitHub Action runner с умным бюджетированием токенов',
+  'Zero-leakage secret handling adhering to GitHub security standards': 'Безопасная обработка секретов по стандартам GitHub без утечек',
+  'Review Speed': 'Скорость проверки',
+  'OWASP Scans': 'Проверки OWASP',
+  'Dev Time Saved': 'Сэкономленное время',
+
+  'CollabFlow AI Canvas': 'CollabFlow AI Canvas',
+  'Real-Time WebSockets & Generative UI': 'Real-time WebSockets и Генеративный UI',
+  'Multiplayer collaborative infinite canvas with live cursor syncing and Google Gemini AI text-to-system architecture generator.':
+    'Многопользовательский бесконечный холст с синхронизацией курсоров в реальном времени и генератором архитектур систем на базе Google Gemini AI.',
+  'CollabFlow AI is a real-time collaborative workspace engineered with Next.js 14, WebSockets, HTML5 Canvas, and Gemini AI. Distributed engineering teams can brainstorm, draw diagrams, track peer cursors in sub-50ms latency, and generate complete microservice architectures from simple natural language prompts.':
+    'CollabFlow AI — рабочее пространство реального времени на Next.js 14, WebSockets, HTML5 Canvas и Gemini AI. Инженерные команды могут совместно проектировать диаграммы, видеть курсоры с задержкой < 50мс и генерировать архитектуры из текстовых промптов.',
+  'Sub-50ms multiplayer cursor and object synchronization': 'Синхронизация курсоров и объектов с задержкой менее 50мс',
+  'Natural Language to Architecture Diagrammer powered by Gemini AI': 'Генерация архитектурных диаграмм по текстовому описанию на Gemini AI',
+  'Infinite zoom, pan, freehand drawing and smart geometric shapes': 'Бесконечный зум, панорамирование, рисование от руки и умные фигуры',
+  'Room-based WebSocket architecture with heartbeat reconnection': 'Комнатная архитектура WebSocket с heartbeat-восстановлением соединения',
+  'Export to SVG, High-Res PNG, and JSON schema': 'Экспорт в SVG, высококачественный PNG и схему JSON',
+  'Optimistic UI state management with conflict resolution': 'Оптимистичное управление состоянием с разрешением конфликтов',
+  'Sync Latency': 'Задержка синхронизации',
+  'AI Gen Time': 'Время генерации AI',
 
   // Journey
   'Career Journey': 'Карьерный путь',
