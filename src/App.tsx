@@ -44,16 +44,12 @@ import { BookingModal } from './components/BookingModal';
 import { UISoundEngine } from './components/UISoundEngine';
 import { AutoTranslator, type Language } from './localization';
 import { sendLead } from './utils/leadCapture';
-import { MagneticParticleSand } from './components/MagneticParticleSand';
 import { CircadianAtmosphere } from './components/CircadianAtmosphere';
 import { KineticDecryptionText } from './components/KineticDecryptionText';
 import { SpatialTiltCard } from './components/SpatialTiltCard';
 import { PCBTraceBorder } from './components/PCBTraceBorder';
-import { LiquidGlassLens } from './components/LiquidGlassLens';
 import { AscentLenisProvider } from './components/AscentLenisProvider';
-import { AscentTerrain3D } from './components/AscentTerrain3D';
-import { AscentTelemetryHUD } from './components/AscentTelemetryHUD';
-import { AscentAudioAtmosphere } from './components/AscentAudioAtmosphere';
+import { QuantumCore3D } from './components/QuantumCore3D';
 
 // Navigation Component
 const Navigation = ({
@@ -265,219 +261,137 @@ const HeroSection = ({ onBookCall }: { onBookCall: () => void }) => {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ['start start', 'end start']
+    offset: ['start start', 'end start'],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-
-  // Ambient sphere parallax — drifts slower than content for depth
-  const sphereY = useTransform(scrollYProgress, [0, 1], ['0%', '28%']);
-  const sphereScale = useTransform(scrollYProgress, [0, 1], [1, 1.25]);
-  const sphereOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
 
   return (
-    <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      {/* Background Elements */}
-      <div className="absolute inset-0 grid-pattern opacity-50" />
-      
-      {/* Floating Orbs */}
-      <motion.div
-        className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full"
-        style={{
-          background: 'radial-gradient(circle, rgba(212,175,55,0.2) 0%, transparent 70%)',
-          y,
-        }}
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.3, 0.6, 0.3],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-      />
-      <motion.div
-        className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full"
-        style={{
-          background: 'radial-gradient(circle, rgba(0,240,255,0.15) 0%, transparent 70%)',
-        }}
-        animate={{
-          scale: [1.2, 1, 1.2],
-          opacity: [0.2, 0.4, 0.2],
-        }}
-        transition={{
-          duration: 10,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-      />
+    <section
+      ref={ref}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-16 bg-[#050608]"
+    >
+      {/* Background Subtle Gradient Lighting */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-20%,rgba(212,175,55,0.08),transparent_70%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_120%,rgba(0,240,255,0.05),transparent_70%)]" />
+      <div className="absolute inset-0 grid-pattern opacity-20 pointer-events-none" />
 
-      {/* ---------- Ambient 3D Sphere behind the headline ---------- */}
+      {/* Exquisite 3D Quantum Core Interactive Gyroscope */}
+      <QuantumCore3D />
+
+      {/* Hero Content Overlay */}
       <motion.div
-        aria-hidden
-        className="absolute inset-0 flex items-center justify-center pointer-events-none"
-        style={{ y: sphereY, scale: sphereScale, opacity: sphereOpacity }}
+        className="relative z-10 text-center px-6 max-w-5xl mx-auto pointer-events-none"
+        style={{ opacity, y }}
       >
-        <div className="relative w-[min(88vw,780px)] aspect-square -translate-y-[6%]">
-          {/* Outer atmospheric bloom */}
-          <div className="absolute inset-0 rounded-full sphere-glow" />
-
-          {/* Rotating conic sheen */}
-          <div className="absolute inset-[14%] rounded-full sphere-sheen" />
-
-          {/* Wireframe mesh shell */}
-          <div className="absolute inset-[16%] sphere-mesh" />
-
-          {/* Core body */}
-          <div className="absolute inset-[18%] rounded-full sphere-core" />
-
-          {/* Specular highlight */}
-          <div
-            className="absolute left-[30%] top-[26%] w-[16%] h-[12%] rounded-full"
-            style={{
-              background:
-                'radial-gradient(circle, rgba(255,252,235,0.5) 0%, transparent 70%)',
-              filter: 'blur(10px)',
-            }}
-          />
-
-          {/* Orbital rings */}
-          <div className="absolute inset-[6%] sphere-orbit" />
-          <div className="absolute inset-[1%] sphere-orbit sphere-orbit-cyan" />
-
-          {/* Drifting light motes */}
-          {[
-            { top: '18%', left: '24%', size: 4, color: '#D4AF37', dur: 7 },
-            { top: '70%', left: '18%', size: 3, color: '#00F0FF', dur: 9 },
-            { top: '30%', left: '80%', size: 3, color: '#00F0FF', dur: 8 },
-            { top: '78%', left: '72%', size: 4, color: '#D4AF37', dur: 11 },
-            { top: '50%', left: '90%', size: 2, color: '#FFFFFF', dur: 6 },
-          ].map((mote, i) => (
-            <motion.span
-              key={i}
-              className="absolute rounded-full"
-              style={{
-                top: mote.top,
-                left: mote.left,
-                width: mote.size,
-                height: mote.size,
-                backgroundColor: mote.color,
-                boxShadow: `0 0 12px ${mote.color}`,
-              }}
-              animate={{ y: [0, -18, 0], opacity: [0.25, 0.9, 0.25] }}
-              transition={{
-                duration: mote.dur,
-                repeat: Infinity,
-                ease: 'easeInOut',
-                delay: i * 0.8,
-              }}
-            />
-          ))}
-        </div>
-      </motion.div>
-
-      <motion.div 
-        className="relative z-10 text-center px-6 max-w-5xl mx-auto"
-        style={{ opacity }}
-      >
-        {/* Status Badge with PCB Laser Trace */}
+        {/* Elite Monolithic Status Capsule */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="inline-block mb-8"
+          className="inline-block mb-8 pointer-events-auto"
         >
-          <PCBTraceBorder color="#00F0FF" className="inline-block">
-            <div className="flex items-center gap-2 px-4 py-2">
-              <span className="w-2 h-2 rounded-full bg-[#00F0FF] animate-pulse" />
-              <span className="text-xs font-mono tracking-wider text-white/90">
-                2026 TRANSCENDENT ARCHITECTURE
-              </span>
-              <span className="text-white/20">·</span>
-              <span className="text-xs text-[#D4AF37] font-semibold">AVAILABLE FOR NEW PROJECTS</span>
-            </div>
-          </PCBTraceBorder>
+          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/[0.04] border border-white/10 backdrop-blur-xl shadow-[0_0_30px_rgba(212,175,55,0.08)]">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+            </span>
+            <span className="text-[11px] font-mono tracking-[0.2em] text-white/70 uppercase">
+              TASHKENT (UTC+5) · ARCHITECTING ENTERPRISE AI &amp; SYSTEMS
+            </span>
+            <span className="h-3 w-px bg-white/10" />
+            <span className="text-[11px] font-mono text-[#D4AF37] font-semibold tracking-wider">
+              ACTIVE
+            </span>
+          </div>
         </motion.div>
 
-        {/* Main Heading with Kinetic Decryption */}
+        {/* Colossal Authoritative Name Heading */}
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight"
-          style={{ textShadow: '0 4px 40px rgba(13,13,15,0.85), 0 2px 12px rgba(13,13,15,0.6)' }}
+          transition={{ duration: 0.8, delay: 0.15 }}
+          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight mb-5 select-none"
+          style={{ letterSpacing: '-0.035em' }}
         >
-          <span className="block text-white">
-            <KineticDecryptionText text="ASQAROV" speed={25} delay={80} />
+          <span className="block text-white drop-shadow-[0_20px_50px_rgba(0,0,0,0.85)]">
+            JAVOHIRBEK
           </span>
-          <span className="block text-gradient-gold">
-            <KineticDecryptionText text="JAVOHIRBEK" speed={25} delay={260} />
+          <span className="block bg-gradient-to-r from-[#F5D77F] via-[#FFEBB0] to-[#D4AF37] bg-clip-text text-transparent drop-shadow-[0_10px_35px_rgba(212,175,55,0.3)]">
+            ASQAROV
           </span>
         </motion.h1>
 
-        {/* Subtitle */}
+        {/* Title & Architectural Thesis */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="text-lg md:text-xl text-white/85 font-light tracking-wide mb-2.5"
+        >
+          Senior Full-Stack &amp; AI Systems Architect
+        </motion.p>
+
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-xl md:text-2xl text-white/60 mb-4"
+          className="text-xs sm:text-sm text-white/45 max-w-xl mx-auto mb-8 leading-relaxed font-mono"
         >
-          Full-Stack Engineer • AI Automation Builder • Product Developer
+          Engineering zero-compromise distributed architectures, high-throughput fintech pipelines, and autonomous AI swarms with extreme aesthetic precision.
         </motion.p>
 
-        {/* Description */}
-        <motion.p
+        {/* Tactile Luxury Action CTAs */}
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="text-base md:text-lg text-white/40 max-w-2xl mx-auto mb-10"
-        >
-          I design and build fast, scalable web products, internal tools, and AI-powered experiences that help businesses automate operations and turn ideas into real customer value.
-        </motion.p>
-
-        {/* CTA Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 pointer-events-auto"
         >
           <motion.a
             href="#projects"
-            className="group px-8 py-4 rounded-full btn-primary text-black font-semibold flex items-center gap-2"
+            data-sound="open"
+            className="group px-7 py-3.5 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#F3E5AB] text-black text-sm font-semibold flex items-center gap-2 shadow-[0_0_30px_rgba(212,175,55,0.35)] hover:shadow-[0_0_45px_rgba(212,175,55,0.55)] transition-shadow"
             whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileTap={{ scale: 0.96 }}
           >
-            Explore Work
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            Explore Masterworks
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </motion.a>
           <motion.button
             onClick={onBookCall}
-            className="px-8 py-4 rounded-full glass text-white font-semibold hover:border-[#00F0FF]/40 hover:bg-[#00F0FF]/5 transition-all flex items-center gap-2"
+            data-sound="click"
+            className="px-7 py-3.5 rounded-full bg-white/[0.04] border border-white/15 backdrop-blur-xl text-white text-sm font-medium hover:border-[#00F0FF]/60 hover:bg-[#00F0FF]/10 transition-all flex items-center gap-2 shadow-[0_0_20px_rgba(0,0,0,0.5)]"
             whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileTap={{ scale: 0.96 }}
           >
-            <Calendar className="w-5 h-5 text-[#00F0FF]" />
-            Book 15-min Discovery Call
+            <Calendar className="w-4 h-4 text-[#00F0FF]" />
+            Schedule Discovery Session
           </motion.button>
         </motion.div>
 
-        {/* Tech Stack Pills */}
+        {/* Core Architecture Tech Badges */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.8 }}
-          className="mt-16 flex flex-wrap justify-center gap-3"
+          transition={{ duration: 1, delay: 0.65 }}
+          className="mt-8 flex flex-wrap justify-center gap-2 pointer-events-auto"
         >
-          {['React', 'Node.js', 'Python', 'AI/ML', 'TypeScript', 'PostgreSQL'].map((tech, i) => (
+          {[
+            'Next.js 15',
+            'Python 3.12 / FastAPI',
+            'Multi-Agent Swarms',
+            'Three.js / WebGL',
+            'PostgreSQL & Qdrant',
+            'Fintech & Payments',
+          ].map((tech, i) => (
             <motion.span
               key={tech}
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.8 + i * 0.1 }}
-              className="px-4 py-2 rounded-full glass text-sm text-white/60 hover:text-white hover:border-[#D4AF37]/50 transition-colors cursor-default"
+              transition={{ delay: 0.65 + i * 0.08 }}
+              className="px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] text-[11px] font-mono text-white/60 hover:text-white hover:border-[#D4AF37]/50 hover:bg-white/[0.06] transition-all cursor-default"
             >
               {tech}
             </motion.span>
@@ -485,20 +399,17 @@ const HeroSection = ({ onBookCall }: { onBookCall: () => void }) => {
         </motion.div>
       </motion.div>
 
-      {/* Scroll Indicator */}
+      {/* Interactive 3D Hint */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none"
       >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="w-6 h-10 rounded-full border-2 border-white/20 flex justify-center pt-2"
-        >
-          <motion.div className="w-1 h-2 rounded-full bg-white/40" />
-        </motion.div>
+        <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-black/50 border border-white/10 text-[10px] font-mono text-white/40 tracking-wider backdrop-blur-md">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37] animate-ping" />
+          <span>DRAG 3D ARTIFACT TO ROTATE</span>
+        </div>
       </motion.div>
     </section>
   );
@@ -1435,37 +1346,17 @@ function App() {
         : 'Asqarov Javohirbek | Full-Stack & AI Engineer';
   }, [language]);
 
-  const [windAudioEnabled, setWindAudioEnabled] = useState(false);
-
   return (
     <AscentLenisProvider>
-      <div className="relative min-h-screen bg-[#0D0D0F] overflow-x-hidden">
+      <div className="relative min-h-screen bg-[#050608] text-white overflow-x-hidden selection:bg-[#D4AF37]/30 selection:text-white">
         <UISoundEngine enabled={soundEnabled} />
         <AutoTranslator language={language} />
 
-        {/* Procedural Everest Mountain Wind & Atmospheric Drone Synthesizer */}
-        <AscentAudioAtmosphere enabled={windAudioEnabled} />
-
-        {/* Real-time 3D Procedural Mountain Terrain & Spline Camera Flight */}
-        <AscentTerrain3D />
-
-        {/* Everest Technical Expedition Telemetry HUD */}
-        <AscentTelemetryHUD
-          audioActive={windAudioEnabled}
-          onToggleAudio={() => setWindAudioEnabled((prev) => !prev)}
-        />
-
-        {/* Noise Overlay */}
-        <div className="noise-overlay" />
+        {/* Noise Grain Overlay */}
+        <div className="noise-overlay opacity-40 pointer-events-none" />
         
         {/* Real-time Tashkent Circadian Atmosphere */}
         <CircadianAtmosphere />
-
-        {/* Engine №14: Magnetic Particle Sand & Typography Morphing */}
-        <MagneticParticleSand />
-
-        {/* 2026 Refractive Liquid Glass Lens & HUD Controller */}
-        <LiquidGlassLens />
 
       {/* Mouse Spotlight */}
       <div
@@ -1501,24 +1392,6 @@ function App() {
 
       {/* Footer */}
       <Footer />
-
-      {/* Floating booking pill (above chat) */}
-      <motion.button
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.5 }}
-        onClick={openBooking}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        className="fixed bottom-24 right-6 z-[60] group"
-        aria-label="Book a discovery call"
-      >
-        <span className="absolute inset-0 rounded-full bg-[#D4AF37] opacity-40 blur-lg group-hover:opacity-70 transition-opacity" />
-        <span className="relative flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#D4AF37] text-black text-xs font-bold">
-          <Calendar className="w-3.5 h-3.5" />
-          <span className="hidden sm:inline">Book a Call</span>
-        </span>
-      </motion.button>
 
       {/* Overlays */}
       <ProjectModal
