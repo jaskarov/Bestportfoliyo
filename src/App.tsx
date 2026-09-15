@@ -44,141 +44,16 @@ import { BookingModal } from './components/BookingModal';
 import { UISoundEngine } from './components/UISoundEngine';
 import { AutoTranslator, type Language } from './localization';
 import { sendLead } from './utils/leadCapture';
-
-// Particle Background Component
-const ParticleBackground = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const particlesRef = useRef<Array<{
-    x: number;
-    y: number;
-    vx: number;
-    vy: number;
-    size: number;
-    color: string;
-  }>>([]);
-  const mouseRef = useRef({ x: 0, y: 0 });
-  const rafRef = useRef<number | undefined>(undefined);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    let particleCount = window.innerWidth <= 768 ? 40 : 80;
-
-    const seedParticles = () => {
-      particlesRef.current = [];
-      for (let i = 0; i < particleCount; i++) {
-        particlesRef.current.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 0.5,
-          vy: (Math.random() - 0.5) * 0.5,
-          size: Math.random() * 2 + 1,
-          color: Math.random() > 0.5 ? '#D4AF37' : '#00F0FF'
-        });
-      }
-    };
-
-    const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      const nextParticleCount = window.innerWidth <= 768 ? 40 : 80;
-      if (nextParticleCount !== particleCount) {
-        particleCount = nextParticleCount;
-        seedParticles();
-      }
-    };
-    resize();
-    window.addEventListener('resize', resize);
-
-    // Initialize particles
-    seedParticles();
-
-    const handleMouseMove = (e: MouseEvent) => {
-      mouseRef.current = { x: e.clientX, y: e.clientY };
-    };
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
-
-    let frameCount = 0;
-    const animate = () => {
-      frameCount++;
-      // Render every 2nd frame for performance (30fps)
-      if (frameCount % 2 === 0) {
-        ctx.fillStyle = 'rgba(13, 13, 15, 0.1)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        particlesRef.current.forEach((particle, i) => {
-          // Update position
-          particle.x += particle.vx;
-          particle.y += particle.vy;
-
-          // Wrap around edges
-          if (particle.x < 0) particle.x = canvas.width;
-          if (particle.x > canvas.width) particle.x = 0;
-          if (particle.y < 0) particle.y = canvas.height;
-          if (particle.y > canvas.height) particle.y = 0;
-
-          // Draw particle
-          ctx.beginPath();
-          ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-          ctx.fillStyle = particle.color;
-          ctx.fill();
-
-          // Draw connections (only check every 5th particle for performance)
-          if (i % 5 === 0) {
-            particlesRef.current.slice(i + 1).forEach((other, j) => {
-              if (j % 3 !== 0) return;
-              const dx = particle.x - other.x;
-              const dy = particle.y - other.y;
-              const distance = Math.sqrt(dx * dx + dy * dy);
-
-              if (distance < 100) {
-                ctx.beginPath();
-                ctx.moveTo(particle.x, particle.y);
-                ctx.lineTo(other.x, other.y);
-                ctx.strokeStyle = `rgba(212, 175, 55, ${0.1 * (1 - distance / 100)})`;
-                ctx.stroke();
-              }
-            });
-          }
-
-          // Mouse interaction
-          const dx = mouseRef.current.x - particle.x;
-          const dy = mouseRef.current.y - particle.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-          if (distance < 150) {
-            ctx.beginPath();
-            ctx.moveTo(particle.x, particle.y);
-            ctx.lineTo(mouseRef.current.x, mouseRef.current.y);
-            ctx.strokeStyle = `rgba(0, 240, 255, ${0.2 * (1 - distance / 150)})`;
-            ctx.stroke();
-          }
-        });
-      }
-
-      rafRef.current = requestAnimationFrame(animate);
-    };
-
-    animate();
-
-    return () => {
-      window.removeEventListener('resize', resize);
-      window.removeEventListener('mousemove', handleMouseMove);
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    };
-  }, []);
-
-  return (
-    <canvas
-      ref={canvasRef}
-      className="particle-canvas fixed inset-0 pointer-events-none z-0"
-      style={{ opacity: 0.6 }}
-    />
-  );
-};
+import { MagneticParticleSand } from './components/MagneticParticleSand';
+import { CircadianAtmosphere } from './components/CircadianAtmosphere';
+import { KineticDecryptionText } from './components/KineticDecryptionText';
+import { SpatialTiltCard } from './components/SpatialTiltCard';
+import { PCBTraceBorder } from './components/PCBTraceBorder';
+import { LiquidGlassLens } from './components/LiquidGlassLens';
+import { AscentLenisProvider } from './components/AscentLenisProvider';
+import { AscentTerrain3D } from './components/AscentTerrain3D';
+import { AscentTelemetryHUD } from './components/AscentTelemetryHUD';
+import { AscentAudioAtmosphere } from './components/AscentAudioAtmosphere';
 
 // Navigation Component
 const Navigation = ({
@@ -507,20 +382,26 @@ const HeroSection = ({ onBookCall }: { onBookCall: () => void }) => {
         className="relative z-10 text-center px-6 max-w-5xl mx-auto"
         style={{ opacity }}
       >
-        {/* Status Badge */}
+        {/* Status Badge with PCB Laser Trace */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8"
+          className="inline-block mb-8"
         >
-          <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-          <span className="text-sm text-white/80">Open for product, AI, and SaaS work</span>
-          <span className="text-white/20">·</span>
-          <span className="text-sm text-white/50">Available for new projects</span>
+          <PCBTraceBorder color="#00F0FF" className="inline-block">
+            <div className="flex items-center gap-2 px-4 py-2">
+              <span className="w-2 h-2 rounded-full bg-[#00F0FF] animate-pulse" />
+              <span className="text-xs font-mono tracking-wider text-white/90">
+                2026 TRANSCENDENT ARCHITECTURE
+              </span>
+              <span className="text-white/20">·</span>
+              <span className="text-xs text-[#D4AF37] font-semibold">AVAILABLE FOR NEW PROJECTS</span>
+            </div>
+          </PCBTraceBorder>
         </motion.div>
 
-        {/* Main Heading */}
+        {/* Main Heading with Kinetic Decryption */}
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -528,8 +409,12 @@ const HeroSection = ({ onBookCall }: { onBookCall: () => void }) => {
           className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight"
           style={{ textShadow: '0 4px 40px rgba(13,13,15,0.85), 0 2px 12px rgba(13,13,15,0.6)' }}
         >
-          <span className="block text-white">Asqarov</span>
-          <span className="block text-gradient-gold">Javohirbek</span>
+          <span className="block text-white">
+            <KineticDecryptionText text="ASQAROV" speed={25} delay={80} />
+          </span>
+          <span className="block text-gradient-gold">
+            <KineticDecryptionText text="JAVOHIRBEK" speed={25} delay={260} />
+          </span>
         </motion.h1>
 
         {/* Subtitle */}
@@ -914,7 +799,10 @@ const ProjectShowcaseSection = ({ onOpenProject }: { onOpenProject: (p: Project)
             Featured Work
           </span>
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">
-            Project <span className="text-gradient-gold">Showcase</span>
+            <KineticDecryptionText text="PROJECT" speed={30} delay={100} />{' '}
+            <span className="text-gradient-gold">
+              <KineticDecryptionText text="SHOWCASE" speed={30} delay={250} />
+            </span>
           </h2>
           <p className="text-white/40 max-w-xl mx-auto">
             Click any project to launch its interactive live demo
@@ -929,110 +817,122 @@ const ProjectShowcaseSection = ({ onOpenProject }: { onOpenProject: (p: Project)
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: index * 0.15 }}
-              className="group perspective"
+              className="group h-full"
             >
-              <motion.div
-                role="button"
-                tabIndex={0}
-                data-sound="open"
-                whileHover={{ rotateY: 5, rotateX: -5, scale: 1.02 }}
-                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                className="glass-card rounded-2xl overflow-hidden h-full tilt-card cursor-pointer"
-                style={{ transformStyle: 'preserve-3d' }}
+              <SpatialTiltCard
+                holographic={true}
+                maxTilt={12}
+                depthScale={1.03}
+                className="h-full cursor-pointer"
                 onClick={() => onOpenProject(project)}
-                onKeyDown={(event) => {
-                  if (event.key === 'Enter' || event.key === ' ') {
-                    event.preventDefault();
-                    onOpenProject(project);
-                  }
-                }}
               >
-                {/* Project Visual */}
-                <div 
-                  className="h-44 flex items-center justify-center relative overflow-hidden"
-                  style={{ backgroundColor: `${project.color}10` }}
+                <div
+                  role="button"
+                  tabIndex={0}
+                  data-sound="open"
+                  data-sound-hover="true"
+                  className="glass-card rounded-2xl overflow-hidden h-full flex flex-col justify-between"
+                  style={{ transformStyle: 'preserve-3d' }}
+                  onKeyDown={(event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                      event.preventDefault();
+                      onOpenProject(project);
+                    }
+                  }}
                 >
-                  <motion.div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    style={{
-                      background: `radial-gradient(circle at 50% 50%, ${project.color}25 0%, transparent 70%)`
-                    }}
-                  />
-                  {/* Grid overlay inside visual */}
-                  <div className="absolute inset-0 grid-pattern opacity-60" />
-                  
-                  <div
-                    className="relative z-10 w-16 h-16 rounded-2xl flex items-center justify-center transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3"
-                    style={{
-                      backgroundColor: `${project.color}18`,
-                      border: `1px solid ${project.color}40`,
-                      boxShadow: `0 0 40px ${project.color}30`,
-                    }}
+                  {/* Project Visual */}
+                  <div 
+                    className="h-44 flex items-center justify-center relative overflow-hidden"
+                    style={{ backgroundColor: `${project.color}10`, transformStyle: 'preserve-3d' }}
                   >
-                    <project.icon className="w-8 h-8" style={{ color: project.color }} />
+                    <motion.div
+                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                      style={{
+                        background: `radial-gradient(circle at 50% 50%, ${project.color}25 0%, transparent 70%)`
+                      }}
+                    />
+                    {/* Grid overlay inside visual */}
+                    <div className="absolute inset-0 grid-pattern opacity-60" />
+                    
+                    <div
+                      className="relative z-10 w-16 h-16 rounded-2xl flex items-center justify-center transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3"
+                      style={{
+                        backgroundColor: `${project.color}18`,
+                        border: `1px solid ${project.color}40`,
+                        boxShadow: `0 0 40px ${project.color}30`,
+                        transform: 'translateZ(38px)',
+                      }}
+                    >
+                      <project.icon className="w-8 h-8" style={{ color: project.color }} />
+                    </div>
+
+                    {/* Live demo hint */}
+                    <div
+                      className="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity shadow-lg"
+                      style={{ transform: 'translateZ(45px)' }}
+                    >
+                      <Play className="w-3 h-3" style={{ color: project.color }} />
+                      <span className="text-[10px] font-medium text-white/90">Live Demo</span>
+                    </div>
                   </div>
 
-                  {/* Live demo hint */}
-                  <div className="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/40 backdrop-blur border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <Play className="w-3 h-3" style={{ color: project.color }} />
-                    <span className="text-[10px] font-medium text-white/80">Live Demo</span>
-                  </div>
-                </div>
+                  {/* Content */}
+                  <div className="p-6 flex-1 flex flex-col justify-between" style={{ transformStyle: 'preserve-3d' }}>
+                    <div style={{ transform: 'translateZ(24px)' }}>
+                      <h3 className="text-xl font-bold text-white mb-2 group-hover:text-[#D4AF37] transition-colors">
+                        {project.title}
+                      </h3>
+                      <p className="text-white/50 text-sm mb-4 line-clamp-3">
+                        {project.description}
+                      </p>
 
-                {/* Content */}
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-[#D4AF37] transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-white/50 text-sm mb-4 line-clamp-3">
-                    {project.description}
-                  </p>
+                      {/* Tags */}
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {project.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="px-2 py-1 rounded-md text-xs"
+                            style={{ backgroundColor: `${project.color}15`, color: project.color }}
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
 
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-2 py-1 rounded-md text-xs"
-                        style={{ backgroundColor: `${project.color}15`, color: project.color }}
+                    {/* Actions */}
+                    <div className="flex gap-3 pt-2" style={{ transform: 'translateZ(32px)' }}>
+                      <motion.button
+                        data-sound="open"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onOpenProject(project);
+                        }}
+                        whileHover={{ scale: 1.03 }}
+                        whileTap={{ scale: 0.97 }}
+                        className="flex-1 py-2.5 rounded-lg text-sm font-semibold text-center flex items-center justify-center gap-2 transition-colors shadow-md"
+                        style={{ backgroundColor: project.color, color: '#000' }}
                       >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Actions */}
-                  <div className="flex gap-3">
-                    <motion.button
-                      data-sound="open"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onOpenProject(project);
-                      }}
-                      whileHover={{ scale: 1.03 }}
-                      whileTap={{ scale: 0.97 }}
-                      className="flex-1 py-2.5 rounded-lg text-sm font-semibold text-center flex items-center justify-center gap-2 transition-colors"
-                      style={{ backgroundColor: project.color, color: '#000' }}
-                    >
-                      <Play className="w-4 h-4" />
-                      Live Demo
-                    </motion.button>
-                    <motion.button
-                      data-sound="open"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onOpenProject(project);
-                      }}
-                      whileHover={{ scale: 1.03 }}
-                      whileTap={{ scale: 0.97 }}
-                      className="flex-1 py-2.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 text-white/70 text-sm font-medium text-center flex items-center justify-center gap-2 transition-colors"
-                    >
-                      <ChevronRight className="w-4 h-4" />
-                      Case Study
-                    </motion.button>
+                        <Play className="w-4 h-4" />
+                        Live Demo
+                      </motion.button>
+                      <motion.button
+                        data-sound="open"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onOpenProject(project);
+                        }}
+                        whileHover={{ scale: 1.03 }}
+                        whileTap={{ scale: 0.97 }}
+                        className="flex-1 py-2.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 text-white/70 text-sm font-medium text-center flex items-center justify-center gap-2 transition-colors"
+                      >
+                        <ChevronRight className="w-4 h-4" />
+                        Case Study
+                      </motion.button>
+                    </div>
                   </div>
                 </div>
-              </motion.div>
+              </SpatialTiltCard>
             </motion.div>
           ))}
         </div>
@@ -1535,15 +1435,37 @@ function App() {
         : 'Asqarov Javohirbek | Full-Stack & AI Engineer';
   }, [language]);
 
+  const [windAudioEnabled, setWindAudioEnabled] = useState(false);
+
   return (
-    <div className="relative min-h-screen bg-[#0D0D0F] overflow-x-hidden">
-      <UISoundEngine enabled={soundEnabled} />
-      <AutoTranslator language={language} />
-      {/* Noise Overlay */}
-      <div className="noise-overlay" />
-      
-      {/* Particle Background */}
-      <ParticleBackground />
+    <AscentLenisProvider>
+      <div className="relative min-h-screen bg-[#0D0D0F] overflow-x-hidden">
+        <UISoundEngine enabled={soundEnabled} />
+        <AutoTranslator language={language} />
+
+        {/* Procedural Everest Mountain Wind & Atmospheric Drone Synthesizer */}
+        <AscentAudioAtmosphere enabled={windAudioEnabled} />
+
+        {/* Real-time 3D Procedural Mountain Terrain & Spline Camera Flight */}
+        <AscentTerrain3D />
+
+        {/* Everest Technical Expedition Telemetry HUD */}
+        <AscentTelemetryHUD
+          audioActive={windAudioEnabled}
+          onToggleAudio={() => setWindAudioEnabled((prev) => !prev)}
+        />
+
+        {/* Noise Overlay */}
+        <div className="noise-overlay" />
+        
+        {/* Real-time Tashkent Circadian Atmosphere */}
+        <CircadianAtmosphere />
+
+        {/* Engine №14: Magnetic Particle Sand & Typography Morphing */}
+        <MagneticParticleSand />
+
+        {/* 2026 Refractive Liquid Glass Lens & HUD Controller */}
+        <LiquidGlassLens />
 
       {/* Mouse Spotlight */}
       <div
@@ -1611,7 +1533,8 @@ function App() {
         onClose={() => setBookingOpen(false)}
         language={language}
       />
-    </div>
+      </div>
+    </AscentLenisProvider>
   );
 }
 

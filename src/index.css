@@ -452,3 +452,40 @@ h1, h2, h3, h4, h5, h6 {
     opacity: 0.38 !important;
   }
 }
+
+/* 2026+ Spatial 3D & Depth Hierarchy */
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.translate-z-10 {
+  transform: translateZ(10px);
+}
+
+.translate-z-20 {
+  transform: translateZ(20px);
+}
+
+.translate-z-30 {
+  transform: translateZ(30px);
+}
+
+.translate-z-40 {
+  transform: translateZ(40px);
+}
+
+.translate-z-60 {
+  transform: translateZ(60px);
+}
+
+.holo-foil {
+  background: linear-gradient(
+    135deg,
+    rgba(212, 175, 55, 0.08) 0%,
+    rgba(0, 240, 255, 0.1) 30%,
+    rgba(139, 92, 246, 0.09) 70%,
+    rgba(236, 72, 153, 0.08) 100%
+  );
+  mix-blend-mode: overlay;
+}
+
