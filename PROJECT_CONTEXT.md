@@ -18,7 +18,8 @@
 
 ---
 
-## 2. Global Birlashgan Agent Standartlari (Pillar 1 – 14)
+## 2. Global Birlashgan Agent Standartlari (Pillar 1 – 15)
+* **Pillar 0 & 15**: Avtonom Refleks & Zero-Prompt Auto-Dispatch (Hech qanday eslatishlarsiz barcha vositalarni o'zi avtomat ishlatish).
 * **Pillar 8**: Autonomous Subagent Swarm (GPT-6 Sol arxitekturasi: Pro rejalashtirish, Flash kodlash, Flash-Lite qidiruv).
 * **Pillar 10.3 & 10.4**: Claude Fable 5 Zero-Slop Minimalist Code & Avtonom Pre-Flight Refleksiya.
 * **Pillar 11**: Cheksiz Kognitiv Xotira (`.brain` & `PROJECT_CONTEXT.md`).
