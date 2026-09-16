@@ -18,9 +18,10 @@
 
 ---
 
-## 2. Global Birlashgan Agent Standartlari (Pillar 1 – 13)
+## 2. Global Birlashgan Agent Standartlari (Pillar 1 – 14)
 * **Pillar 8**: Autonomous Subagent Swarm (GPT-6 Sol arxitekturasi: Pro rejalashtirish, Flash kodlash, Flash-Lite qidiruv).
 * **Pillar 10.3 & 10.4**: Claude Fable 5 Zero-Slop Minimalist Code & Avtonom Pre-Flight Refleksiya.
 * **Pillar 11**: Cheksiz Kognitiv Xotira (`.brain` & `PROJECT_CONTEXT.md`).
 * **Pillar 12**: GPT-6 Astra Desktop & OS Agentic Engine (CUA, Windows 11 Admin, PowerShell, Chrome DevTools MCP, GitHub MCP).
 * **Pillar 13**: Ultra-Frugal High-Yield Token Architecture (Jarrohlik qidiruvi, Zero Output Waste, arzon subagentlar, toza sessiya gigiyenasi).
+* **Pillar 14**: NextGen 4 Frontier Arsenals (Deep Research, Shadow Workspace, Gemini Live WebRTC Audio, Generativ 3D/Video).
