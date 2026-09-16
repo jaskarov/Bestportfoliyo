@@ -118,6 +118,53 @@ export const UISoundEngine = ({ enabled }: UISoundEngineProps) => {
       }
     };
 
+    // -------------------------------------------------------------
+    // Apple VisionOS Spatial 3D Audio Resonator (HRTF Panner)
+    // -------------------------------------------------------------
+    const handleSpatialAudioEvent = (e: Event) => {
+      if (!enabled) return;
+      const customEvent = e as CustomEvent<{ x: number; y: number; z?: number; velocity: number }>;
+      const { x, y, z = 1, velocity } = customEvent.detail || { x: 0, y: 0, z: 1, velocity: 0 };
+      if (Math.abs(velocity) < 0.001) return;
+
+      const context = getContext();
+      if (!context) return;
+
+      const now = context.currentTime;
+      const panner = context.createPanner();
+      panner.panningModel = 'HRTF';
+      panner.distanceModel = 'inverse';
+      panner.refDistance = 1;
+      panner.maxDistance = 100;
+      panner.rolloffFactor = 1;
+      panner.coneInnerAngle = 360;
+
+      // Position in 3D audio space
+      panner.positionX.setValueAtTime(Math.max(-5, Math.min(5, x * 4)), now);
+      panner.positionY.setValueAtTime(Math.max(-3, Math.min(3, y * 3)), now);
+      panner.positionZ.setValueAtTime(z, now);
+
+      const gain = context.createGain();
+      const intensity = Math.min(0.035, Math.abs(velocity) * 0.8);
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.exponentialRampToValueAtTime(intensity, now + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.25);
+
+      const osc = context.createOscillator();
+      osc.type = 'sine';
+      // Low celestial harmonic frequency (108Hz base + modulation)
+      const baseFreq = 108 + Math.min(120, Math.abs(velocity) * 800);
+      osc.frequency.setValueAtTime(baseFreq, now);
+      osc.frequency.exponentialRampToValueAtTime(baseFreq * 0.7, now + 0.22);
+
+      osc.connect(gain);
+      gain.connect(panner);
+      panner.connect(context.destination);
+
+      osc.start(now);
+      osc.stop(now + 0.26);
+    };
+
     const handleClick = (event: MouseEvent) => {
       const target = event.target as Element | null;
       const control = target?.closest<HTMLElement>('button, a, [role="button"]');
@@ -136,10 +183,12 @@ export const UISoundEngine = ({ enabled }: UISoundEngineProps) => {
 
     document.addEventListener('click', handleClick, true);
     document.addEventListener('mouseover', handleMouseOver, true);
+    window.addEventListener('jasper:spatial-audio', handleSpatialAudioEvent as EventListener);
 
     return () => {
       document.removeEventListener('click', handleClick, true);
       document.removeEventListener('mouseover', handleMouseOver, true);
+      window.removeEventListener('jasper:spatial-audio', handleSpatialAudioEvent as EventListener);
     };
   }, [enabled]);
 

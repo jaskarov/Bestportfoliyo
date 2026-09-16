@@ -49,6 +49,7 @@ import { SpatialTiltCard } from './components/SpatialTiltCard';
 import { PCBTraceBorder } from './components/PCBTraceBorder';
 import { AscentLenisProvider } from './components/AscentLenisProvider';
 import { QuantumCore3D } from './components/QuantumCore3D';
+import { WebGPUCosmicCanvas } from './components/WebGPUCosmicCanvas';
 
 // Navigation Component
 const Navigation = ({
@@ -169,13 +170,24 @@ const Navigation = ({
             <motion.button
               data-sound-toggle="true"
               onClick={onToggleSound}
-              whileHover={{ scale: 1.08 }}
-              whileTap={{ scale: 0.92 }}
-              className="w-10 h-10 rounded-full bg-white/[0.04] border border-white/10 flex items-center justify-center text-white/55 hover:text-[#00F0FF] hover:border-[#00F0FF]/30 transition-colors"
-              aria-label={soundEnabled ? 'Mute interface sounds' : 'Enable interface sounds'}
-              title={soundEnabled ? 'Mute interface sounds' : 'Enable interface sounds'}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="h-9 px-3 rounded-full bg-white/[0.04] border border-white/10 flex items-center gap-2 text-white/55 hover:text-[#00F0FF] hover:border-[#00F0FF]/30 transition-all"
+              aria-label={soundEnabled ? 'Mute spatial audio' : 'Enable spatial audio'}
+              title={soundEnabled ? 'Spatial 3D Audio: ACTIVE' : 'Enable spatial audio'}
             >
-              {soundEnabled ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
+              {soundEnabled ? (
+                <>
+                  <Volume2 className="w-3.5 h-3.5 text-[#00F0FF]" />
+                  <span className="flex items-center gap-0.5 h-2.5">
+                    <span className="w-0.5 h-2.5 bg-[#00F0FF] rounded-full animate-pulse" />
+                    <span className="w-0.5 h-1.5 bg-[#00F0FF] rounded-full animate-pulse delay-75" />
+                    <span className="w-0.5 h-3 bg-[#00F0FF] rounded-full animate-pulse delay-150" />
+                  </span>
+                </>
+              ) : (
+                <VolumeX className="w-3.5 h-3.5" />
+              )}
             </motion.button>
 
             <motion.button
@@ -275,6 +287,9 @@ const HeroSection = ({ onBookCall }: { onBookCall: () => void }) => {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-20%,rgba(212,175,55,0.08),transparent_70%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_120%,rgba(0,240,255,0.05),transparent_70%)]" />
       <div className="absolute inset-0 grid-pattern opacity-20 pointer-events-none" />
+
+      {/* Tier-1 WebGPU Gravitational Particle Engine (100k particles) */}
+      <WebGPUCosmicCanvas />
 
       {/* Exquisite 3D Quantum Core Interactive Gyroscope */}
       <QuantumCore3D />

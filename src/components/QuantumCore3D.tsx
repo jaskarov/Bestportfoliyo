@@ -1,18 +1,23 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 /**
- * QuantumCore3D — An exquisite, photorealistic 2026+ 3D interactive artifact.
- * Inspired by Apple VisionOS, Linear, and Teenage Engineering hardware design.
+ * QuantumCore3D — Tier-1 2026+ Interactive 3D Artifact.
+ * 
  * Features:
- * - Floating Obsidian & Frosted Glass Gyroscopic Rings
- * - Internal Quantum Icosahedron Core pulsing with golden synaptic energy
- * - Silky smooth mouse drag physics with inertia and momentum
- * - Specular rim lighting and dynamic caustic flares
- * - 60/120 FPS performance locked via lightweight procedural geometries
+ * - Floating Obsidian & Frosted Glass Gyroscopic Rings.
+ * - Central Quantum Icosahedron Core with golden synaptic energy.
+ * - GSAP ScrollTrigger Scrollytelling (Exploded View): Rings separate, core levitates, revealing architectural specs.
+ * - Apple VisionOS Spatial 3D Audio dispatch on drag/rotate.
+ * - Silky smooth mouse drag physics with inertia and momentum.
  */
 export const QuantumCore3D: React.FC = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const [explodedTelemetry, setExplodedTelemetry] = useState(0);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -30,7 +35,7 @@ export const QuantumCore3D: React.FC = () => {
     );
     camera.position.set(0, 0, 14.2);
 
-    // Renderer with ultra-clean tone mapping
+    // Renderer with ACESFilmic tone mapping
     const renderer = new THREE.WebGLRenderer({
       antialias: true,
       alpha: true,
@@ -42,23 +47,19 @@ export const QuantumCore3D: React.FC = () => {
     renderer.toneMappingExposure = 1.25;
     container.appendChild(renderer.domElement);
 
-    // Lighting hierarchy (Dark Luxury Studio Setup)
-    // 1. Warm Key Light (Luxury Gold)
+    // Lighting (Dark Luxury Studio Setup)
     const goldLight = new THREE.PointLight(0xd4af37, 45, 30);
     goldLight.position.set(6, 6, 8);
     scene.add(goldLight);
 
-    // 2. Cool Rim Light (Electric Cyan)
     const cyanLight = new THREE.PointLight(0x00f0ff, 35, 30);
     cyanLight.position.set(-6, -5, 6);
     scene.add(cyanLight);
 
-    // 3. Violet Fill Light (Atmospheric depth)
     const violetLight = new THREE.PointLight(0x8b5cf6, 20, 25);
     violetLight.position.set(0, -8, -4);
     scene.add(violetLight);
 
-    // 4. Soft Top Ambient Light
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.35);
     scene.add(ambientLight);
 
@@ -107,7 +108,6 @@ export const QuantumCore3D: React.FC = () => {
     const ring1 = new THREE.Mesh(ring1Geo, ring1Mat);
     coreGroup.add(ring1);
 
-    // Ring 1 Golden Vias / Nodes (micro sensor nodes along perimeter)
     const ring1NodesGroup = new THREE.Group();
     for (let i = 0; i < 6; i++) {
       const angle = (i / 6) * Math.PI * 2;
@@ -152,7 +152,7 @@ export const QuantumCore3D: React.FC = () => {
     coreGroup.add(ring3);
 
     // ----------------------------------------------------
-    // 5. Floating Quantum Quantum Particles (Discrete, Luxury Dust)
+    // 5. Floating Quantum Dust Particles
     // ----------------------------------------------------
     const particleCount = 75;
     const pGeo = new THREE.BufferGeometry();
@@ -175,7 +175,47 @@ export const QuantumCore3D: React.FC = () => {
     const particles = new THREE.Points(pGeo, pMat);
     coreGroup.add(particles);
 
-    // Interactive Drag Physics & Inertia
+    // ----------------------------------------------------
+    // 6. GSAP ScrollTrigger Scrollytelling (Exploded View)
+    // ----------------------------------------------------
+    const explosion = {
+      ring1Scale: 1.0,
+      ring2Scale: 1.0,
+      ring3Scale: 1.0,
+      ring2Z: 0,
+      ring3Z: 0,
+      coreLevitateY: 0,
+      coreEmissive: 0.15,
+      cameraZ: 14.2,
+      progress: 0,
+    };
+
+    const heroSection = container.closest('section') || container;
+    const scrollTriggerInstance = ScrollTrigger.create({
+      trigger: heroSection,
+      start: 'top top',
+      end: 'bottom top',
+      scrub: 1.2,
+      onUpdate: (self) => {
+        const p = self.progress;
+        explosion.progress = p;
+        setExplodedTelemetry(p);
+
+        // Exploded view progression
+        explosion.ring3Scale = 1.0 + p * 0.55;
+        explosion.ring3Z = p * 3.2;
+        explosion.ring2Scale = 1.0 + p * 0.35;
+        explosion.ring2Z = -p * 2.8;
+        explosion.ring1Scale = 1.0 + p * 0.18;
+        explosion.coreLevitateY = p * 1.6;
+        explosion.coreEmissive = 0.15 + p * 0.85;
+        explosion.cameraZ = 14.2 - p * 2.0;
+      },
+    });
+
+    // ----------------------------------------------------
+    // 7. Interactive Drag Physics & Spatial Audio Dispatch
+    // ----------------------------------------------------
     let isDragging = false;
     let prevMousePos = { x: 0, y: 0 };
     let targetRotation = { x: 0.2, y: -0.3 };
@@ -200,6 +240,17 @@ export const QuantumCore3D: React.FC = () => {
         targetRotation.y += velocity.x;
         targetRotation.x += velocity.y;
         prevMousePos = { x: clientX, y: clientY };
+
+        // Dispatch Apple VisionOS Spatial Audio Event
+        window.dispatchEvent(
+          new CustomEvent('jasper:spatial-audio', {
+            detail: {
+              x: (clientX / window.innerWidth - 0.5) * 4,
+              y: (0.5 - clientY / window.innerHeight) * 3,
+              velocity: Math.hypot(velocity.x, velocity.y),
+            },
+          })
+        );
       } else {
         // Gentle cursor hover gravity sway
         const normX = (clientX / window.innerWidth - 0.5) * 2;
@@ -228,7 +279,9 @@ export const QuantumCore3D: React.FC = () => {
     };
     window.addEventListener('resize', handleResize);
 
-    // Silky Render Loop
+    // ----------------------------------------------------
+    // 8. Silky 60/120 FPS Render Loop
+    // ----------------------------------------------------
     let animId: number;
     let clock = new THREE.Clock();
 
@@ -236,9 +289,8 @@ export const QuantumCore3D: React.FC = () => {
       const delta = clock.getDelta();
       const time = clock.getElapsedTime();
 
-      // Inertial damping
+      // Inertial damping & continuous organic orbit
       if (!isDragging) {
-        // Continuous organic orbit
         ring1.rotation.x += 0.008;
         ring1.rotation.y += 0.012;
 
@@ -252,17 +304,30 @@ export const QuantumCore3D: React.FC = () => {
         wireMesh.rotation.y -= 0.015;
         particles.rotation.y += 0.002;
 
-        // Subtle breathing scale pulse
         const breathe = 1 + Math.sin(time * 1.5) * 0.03;
         coreMesh.scale.set(breathe, breathe, breathe);
         wireMesh.scale.set(breathe, breathe, breathe);
       }
 
+      // Apply Exploded View from ScrollTrigger
+      ring3.scale.setScalar(explosion.ring3Scale);
+      ring3.position.z = explosion.ring3Z;
+
+      ring2.scale.setScalar(explosion.ring2Scale);
+      ring2.position.z = explosion.ring2Z;
+
+      ring1.scale.setScalar(explosion.ring1Scale);
+
+      coreMesh.position.y = explosion.coreLevitateY;
+      wireMesh.position.y = explosion.coreLevitateY;
+      coreMat.emissiveIntensity = explosion.coreEmissive;
+      camera.position.z = explosion.cameraZ;
+
       // Smooth lerp towards target rotation
       coreGroup.rotation.x += (targetRotation.x - coreGroup.rotation.x) * 0.06;
       coreGroup.rotation.y += (targetRotation.y - coreGroup.rotation.y) * 0.06;
 
-      // Dynamic light orbit
+      // Dynamic studio lighting orbit
       goldLight.position.x = Math.sin(time * 0.8) * 7;
       goldLight.position.z = Math.cos(time * 0.8) * 7;
       cyanLight.position.x = Math.cos(time * 0.6) * -7;
@@ -275,6 +340,7 @@ export const QuantumCore3D: React.FC = () => {
     render();
 
     return () => {
+      scrollTriggerInstance.kill();
       window.removeEventListener('mousedown', onPointerDown);
       window.removeEventListener('mousemove', onPointerMove);
       window.removeEventListener('mouseup', onPointerUp);
@@ -305,14 +371,48 @@ export const QuantumCore3D: React.FC = () => {
   }, []);
 
   return (
-    <div
-      ref={containerRef}
-      aria-hidden="true"
-      className="absolute inset-0 pointer-events-auto z-0 flex items-center justify-center overflow-hidden cursor-grab active:cursor-grabbing"
-      style={{
-        maskImage: 'radial-gradient(ellipse 70% 70% at 50% 46%, black 50%, transparent 85%)',
-        WebkitMaskImage: 'radial-gradient(ellipse 70% 70% at 50% 46%, black 50%, transparent 85%)',
-      }}
-    />
+    <div className="absolute inset-0 pointer-events-auto z-0 flex items-center justify-center overflow-hidden">
+      <div
+        ref={containerRef}
+        aria-hidden="true"
+        className="w-full h-full cursor-grab active:cursor-grabbing"
+        style={{
+          maskImage: 'radial-gradient(ellipse 70% 70% at 50% 46%, black 50%, transparent 85%)',
+          WebkitMaskImage: 'radial-gradient(ellipse 70% 70% at 50% 46%, black 50%, transparent 85%)',
+        }}
+      />
+
+      {/* Dynamic Holographic Architecture Telemetry Tags during Exploded View */}
+      {explodedTelemetry > 0.15 && (
+        <div
+          className="absolute inset-0 pointer-events-none flex flex-col justify-between p-8 sm:p-12 lg:p-16 transition-opacity duration-300 z-10"
+          style={{ opacity: Math.min(1, (explodedTelemetry - 0.15) * 2.5) }}
+        >
+          {/* Top-Left Tag */}
+          <div className="self-start flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-black/60 border border-[#00f0ff]/30 backdrop-blur-xl shadow-[0_0_20px_rgba(0,240,255,0.15)]">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#00f0ff] animate-ping" />
+            <span className="text-[10px] font-mono tracking-widest text-[#00f0ff] uppercase font-bold">
+              [01: TITANIUM GYRO // WEBGPU WGSL]
+            </span>
+          </div>
+
+          {/* Center-Right Tag */}
+          <div className="self-end flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-black/60 border border-[#d4af37]/30 backdrop-blur-xl shadow-[0_0_20px_rgba(212,175,55,0.15)]">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#d4af37]" />
+            <span className="text-[10px] font-mono tracking-widest text-[#F5D77F] uppercase font-bold">
+              [02: QUANTUM CORE // LOCAL-FIRST 0MS]
+            </span>
+          </div>
+
+          {/* Bottom-Left Tag */}
+          <div className="self-start flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-black/60 border border-[#c084fc]/30 backdrop-blur-xl shadow-[0_0_20px_rgba(192,132,252,0.15)]">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#c084fc] animate-pulse" />
+            <span className="text-[10px] font-mono tracking-widest text-[#e9d5ff] uppercase font-bold">
+              [03: SYNAPTIC CORE // GEMINI LIVE WEBRTC]
+            </span>
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
