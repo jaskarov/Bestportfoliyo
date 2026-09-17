@@ -26,7 +26,10 @@ import {
   Layers,
   MousePointer,
   Cpu,
-  Bot
+  Bot,
+  FileText,
+  Database,
+  Search
 } from 'lucide-react';
 import type { Project } from '../data/projects';
 import { type Language } from '../localization';
@@ -582,6 +585,198 @@ const Voice2DealDemo = () => {
   );
 };
 
+/* ---------------------------------- DocuPulse RAG Demo ---------------------------------- */
+
+const DocuPulseDemo = () => {
+  const [stage, setStage] = useState<'idle' | 'uploading' | 'processing' | 'ready'>('idle');
+  const [query, setQuery] = useState('How does the background worker pool scale?');
+  const [searching, setSearching] = useState(false);
+  const [searchResult, setSearchResult] = useState<string | null>(null);
+
+  const startUpload = () => {
+    setStage('uploading');
+    setTimeout(() => {
+      setStage('processing');
+      setTimeout(() => {
+        setStage('ready');
+      }, 1000);
+    }, 400);
+  };
+
+  const runSearch = () => {
+    setSearching(true);
+    setTimeout(() => {
+      setSearching(false);
+      setSearchResult(
+        'DocuPulse Engine (§4.2, Page 42): "The worker swarm listens to the Redis BRPOP queue. When backlog exceeds 50 jobs, worker replicas auto-scale up to 10 instances, sustaining sub-250ms P95 latency at 177 RPS without blocking the core HTTP gateway."'
+      );
+    }, 350);
+  };
+
+  return (
+    <div className="space-y-4 text-xs font-mono">
+      <div className="flex flex-wrap items-center justify-between gap-2 p-3 rounded-xl bg-blue-500/10 border border-blue-500/20">
+        <div className="flex items-center gap-2">
+          <FileText className="w-4 h-4 text-blue-400" />
+          <span className="text-white font-semibold">Enterprise_Architecture_2026.pdf</span>
+          <span className="text-white/40">(84 pages, 14.2 MB)</span>
+        </div>
+        <button
+          onClick={startUpload}
+          disabled={stage !== 'idle'}
+          className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-colors ${
+            stage === 'idle'
+              ? 'bg-blue-600 hover:bg-blue-500 text-white cursor-pointer'
+              : 'bg-blue-600/30 text-blue-300 cursor-default'
+          }`}
+        >
+          {stage === 'idle' && <><Play className="w-3 h-3" /> Start Async Upload</>}
+          {stage === 'uploading' && <><Zap className="w-3 h-3 animate-spin" /> HTTP 202 Accepted (1.4ms)</>}
+          {stage === 'processing' && <><Database className="w-3 h-3 animate-pulse" /> Redis Chunking & Qdrant Upsert...</>}
+          {stage === 'ready' && <><CheckCircle2 className="w-3 h-3 text-emerald-400" /> Vectors Indexed (Qdrant HNSW)</>}
+        </button>
+      </div>
+
+      {stage !== 'idle' && (
+        <div className="grid grid-cols-3 gap-2 text-[11px]">
+          <div className="p-2.5 rounded-lg bg-black/40 border border-white/5">
+            <span className="text-white/40 block">FastAPI Ingest</span>
+            <span className="text-emerald-400 font-bold">HTTP 202 (1.4ms)</span>
+          </div>
+          <div className="p-2.5 rounded-lg bg-black/40 border border-white/5">
+            <span className="text-white/40 block">Worker Chunks</span>
+            <span className="text-blue-400 font-bold">{stage === 'ready' ? '248 vectors' : 'Parsing...'}</span>
+          </div>
+          <div className="p-2.5 rounded-lg bg-black/40 border border-white/5">
+            <span className="text-white/40 block">k6 Benchmark</span>
+            <span className="text-purple-400 font-bold">177 RPS / 0% err</span>
+          </div>
+        </div>
+      )}
+
+      {stage === 'ready' && (
+        <div className="space-y-2 pt-2 border-t border-white/10">
+          <label className="text-white/60 block text-[11px]">Vector Semantic Query (sub-50ms):</label>
+          <div className="flex gap-2">
+            <input
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              className="flex-1 px-3 py-2 rounded-lg bg-black/50 border border-white/10 text-white text-xs focus:outline-none focus:border-blue-500"
+            />
+            <button
+              onClick={runSearch}
+              disabled={searching}
+              className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold flex items-center gap-1.5 cursor-pointer"
+            >
+              <Search className="w-3.5 h-3.5" />
+              Query
+            </button>
+          </div>
+
+          {searchResult && (
+            <div className="p-3 rounded-xl bg-blue-950/40 border border-blue-500/30 text-white/90 space-y-1.5">
+              <div className="flex items-center justify-between text-[10px]">
+                <span className="text-blue-400 font-bold">Qdrant Cosine Similarity: 0.942</span>
+                <span className="text-emerald-400">Lookup Time: 38ms</span>
+              </div>
+              <p className="text-[11px] leading-relaxed text-blue-100">{searchResult}</p>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+};
+
+/* ---------------------------------- DentaMed Clinic Demo ---------------------------------- */
+
+const DentaMedDemo = () => {
+  const [selectedTooth, setSelectedTooth] = useState<number>(16);
+  const [booked, setBooked] = useState(false);
+
+  const teethData: Record<number, { name: string; condition: string; treatment: string; price: number }> = {
+    11: { name: 'Markaziy kurak (Upper Central)', condition: 'Emal yorilishi (Enamel micro-crack)', treatment: 'Estetik restavratsiya', price: 250000 },
+    16: { name: 'Birinchi molyar (Upper Right Molar)', condition: 'Chuqur karies (Deep Caries)', treatment: 'Fotopolimer kompozit + Muolaja', price: 350000 },
+    21: { name: 'Markaziy kurak (Upper Left Central)', condition: 'Sog\'lom (Healthy)', treatment: 'Profilaktik tozalash', price: 150000 },
+    26: { name: 'Birinchi molyar (Upper Left Molar)', condition: 'Eski plomba yeyilgan', treatment: 'Plombani almashtirish', price: 300000 },
+    36: { name: 'Pastki molyar (Lower Left Molar)', condition: 'Pulpit asorati', treatment: 'Kanal davolash va plomba', price: 420000 },
+    46: { name: 'Pastki molyar (Lower Right Molar)', condition: 'Sog\'lom (Healthy)', treatment: 'Ftorlash muolajasi', price: 120000 },
+  };
+
+  const tooth = teethData[selectedTooth] || teethData[16];
+
+  return (
+    <div className="space-y-4 text-xs font-mono">
+      <div className="p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/20">
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-cyan-400 font-bold uppercase tracking-wider text-[10px]">
+            32-Tishlik Anatomik FDI Yoy Modeli
+          </span>
+          <span className="text-white/40 text-[10px]">Telegram Mini App Haptics</span>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {[11, 16, 21, 26, 36, 46].map((num) => (
+            <button
+              key={num}
+              onClick={() => {
+                setSelectedTooth(num);
+                setBooked(false);
+              }}
+              className={`px-3 py-1.5 rounded-lg font-bold transition-all ${
+                selectedTooth === num
+                  ? 'bg-cyan-500 text-black shadow-lg shadow-cyan-500/30'
+                  : 'bg-white/5 border border-white/10 text-white/70 hover:bg-white/10'
+              }`}
+            >
+              FDI #{num}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="grid md:grid-cols-2 gap-3">
+        <div className="p-3 rounded-xl bg-black/40 border border-white/10 space-y-2">
+          <div className="flex justify-between items-center text-[10px] text-white/40">
+            <span>Tanlangan Tish:</span>
+            <span className="text-cyan-400 font-bold">FDI #{selectedTooth}</span>
+          </div>
+          <p className="text-white font-semibold">{tooth.name}</p>
+          <div className="space-y-1 text-[11px] text-white/70">
+            <p><span className="text-white/40">Holat:</span> <span className="text-amber-400">{tooth.condition}</span></p>
+            <p><span className="text-white/40">Muolaja:</span> {tooth.treatment}</p>
+            <p><span className="text-white/40">Narx:</span> <span className="text-emerald-400 font-bold">{tooth.price.toLocaleString()} UZS</span></p>
+          </div>
+        </div>
+
+        <div className="p-3 rounded-xl bg-black/40 border border-white/10 flex flex-col justify-between">
+          <div>
+            <span className="text-white/40 block text-[10px]">VIP Talon & Qabul:</span>
+            <p className="text-white text-xs mt-1">
+              {booked ? 'Talon muvaffaqiyatli band qilindi!' : 'Bemor navbatsiz PIN-kodli chipta oladi'}
+            </p>
+          </div>
+
+          {booked ? (
+            <div className="mt-3 p-2.5 rounded-lg bg-emerald-500/20 border border-emerald-500/40 text-center">
+              <span className="text-[10px] text-emerald-300 block">Elektron Talon:</span>
+              <span className="text-base font-bold text-white tracking-widest">#PIN-8492</span>
+              <span className="text-[9px] text-emerald-400 block mt-0.5">Telegram orqali jo'natildi ✓</span>
+            </div>
+          ) : (
+            <button
+              onClick={() => setBooked(true)}
+              className="mt-3 w-full py-2 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white font-bold cursor-pointer transition-colors"
+            >
+              Qabulga Yozilish (Book Slot)
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 /* ---------------------------------- Modal ---------------------------------- */
 
 interface ProjectModalProps {
@@ -596,6 +791,16 @@ const demoComponents: Record<Project['id'], {
   disclaimer: string;
   render: (language: Language) => React.ReactNode;
 }> = {
+  'docupulse-ai': {
+    title: 'Enterprise Asynchronous RAG Ingestion Simulator',
+    disclaimer: 'Live HTTP 202 queue ticket & Qdrant vector retrieval simulation',
+    render: () => <DocuPulseDemo />,
+  },
+  'dentamed-atelier': {
+    title: 'Interactive 32-Tooth FDI Anatomical Model & VIP Pass Simulator',
+    disclaimer: 'Live FDI tooth selection, clinical diagnostics, and VIP voucher generation',
+    render: () => <DentaMedDemo />,
+  },
   'uzpayment-sdk': {
     title: 'Interactive Multi-Provider Gateway Simulator',
     disclaimer: 'Live HMAC signature and provider response engine',
