@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { ExternalLink, Layers, Sparkles, ArrowRight } from 'lucide-react';
 import type { Project } from '../data/projects';
 
@@ -12,7 +12,6 @@ export const FlipGallery3D: React.FC<FlipGallery3DProps> = ({
   projects,
   onOpenProject,
 }) => {
-  const [activeIdx, setActiveIdx] = useState(0);
   const [flipped, setFlipped] = useState<Record<number, boolean>>({});
 
   const toggleFlip = (index: number, e: React.MouseEvent) => {
@@ -88,8 +87,10 @@ export const FlipGallery3D: React.FC<FlipGallery3DProps> = ({
 
                   {/* Bottom Action Footer */}
                   <div className="relative z-10 pt-4 border-t border-white/[0.08] flex items-center justify-between">
-                    <span className="text-xs font-mono text-white/40">
-                      {project.stats || 'Enterprise Grade'}
+                    <span className="text-xs font-mono text-white/50">
+                      {project.stats?.[0]
+                        ? `${project.stats[0].value} ${project.stats[0].label}`
+                        : 'Enterprise Grade'}
                     </span>
                     <button
                       onClick={() => onOpenProject(project)}

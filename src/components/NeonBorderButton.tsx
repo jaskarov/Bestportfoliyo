@@ -16,9 +16,6 @@ export const NeonBorderButton: React.FC<NeonBorderButtonProps> = ({
 }) => {
   const isGold = variant === 'gold';
   const glowColor = isGold ? '#D4AF37' : '#00F0FF';
-  const bgGradient = isGold
-    ? 'from-[#D4AF37] to-[#F3E5AB]'
-    : 'from-[#00F0FF] to-cyan-300';
 
   return (
     <motion.button
