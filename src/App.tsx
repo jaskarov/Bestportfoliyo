@@ -50,6 +50,11 @@ import { PCBTraceBorder } from './components/PCBTraceBorder';
 import { AscentLenisProvider } from './components/AscentLenisProvider';
 import { QuantumCore3D } from './components/QuantumCore3D';
 import { WebGPUCosmicCanvas } from './components/WebGPUCosmicCanvas';
+import { InteractiveGrid, TECH_ITEMS } from './components/InteractiveGrid';
+import { CursorRingField } from './components/CursorRingField';
+import { MagneticSpringText } from './components/MagneticSpringText';
+import { FlipGallery3D } from './components/FlipGallery3D';
+import { NeonBorderButton } from './components/NeonBorderButton';
 
 // Navigation Component
 const Navigation = ({
@@ -291,6 +296,9 @@ const HeroSection = ({ onBookCall }: { onBookCall: () => void }) => {
       {/* Tier-1 WebGPU Gravitational Particle Engine (100k particles) */}
       <WebGPUCosmicCanvas />
 
+      {/* Originkit WebGL Cursor Ring Field */}
+      <CursorRingField />
+
       {/* Exquisite 3D Quantum Core Interactive Gyroscope */}
       <QuantumCore3D />
 
@@ -321,21 +329,25 @@ const HeroSection = ({ onBookCall }: { onBookCall: () => void }) => {
           </div>
         </motion.div>
 
-        {/* Colossal Authoritative Name Heading */}
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.15 }}
-          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight mb-5 select-none"
-          style={{ letterSpacing: '-0.035em' }}
-        >
-          <span className="block text-white drop-shadow-[0_20px_50px_rgba(0,0,0,0.85)]">
-            JAVOHIRBEK
-          </span>
-          <span className="block bg-gradient-to-r from-[#F5D77F] via-[#FFEBB0] to-[#D4AF37] bg-clip-text text-transparent drop-shadow-[0_10px_35px_rgba(212,175,55,0.3)]">
-            ASQAROV
-          </span>
-        </motion.h1>
+        {/* Colossal Authoritative Name Heading with Originkit Spring & Magnetic Aberration */}
+        <div className="pointer-events-auto mb-5">
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.15 }}
+            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight select-none"
+            style={{ letterSpacing: '-0.035em' }}
+          >
+            <MagneticSpringText
+              text="JAVOHIRBEK"
+              className="block text-white drop-shadow-[0_20px_50px_rgba(0,0,0,0.85)]"
+            />
+            <MagneticSpringText
+              text="ASQAROV"
+              className="block bg-gradient-to-r from-[#F5D77F] via-[#FFEBB0] to-[#D4AF37] bg-clip-text text-transparent drop-shadow-[0_10px_35px_rgba(212,175,55,0.3)]"
+            />
+          </motion.h1>
+        </div>
 
         {/* Title & Architectural Thesis */}
         <motion.p
@@ -356,33 +368,27 @@ const HeroSection = ({ onBookCall }: { onBookCall: () => void }) => {
           Engineering zero-compromise distributed architectures, high-throughput fintech pipelines, and autonomous AI swarms with extreme aesthetic precision.
         </motion.p>
 
-        {/* Tactile Luxury Action CTAs */}
+        {/* Tactile Luxury Action CTAs with Neon Border Beams */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 pointer-events-auto"
+          className="flex flex-col sm:flex-row items-center justify-center gap-5 pointer-events-auto"
         >
-          <motion.a
-            href="#projects"
-            data-sound="open"
-            className="group px-7 py-3.5 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#F3E5AB] text-black text-sm font-semibold flex items-center gap-2 shadow-[0_0_30px_rgba(212,175,55,0.35)] hover:shadow-[0_0_45px_rgba(212,175,55,0.55)] transition-shadow"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.96 }}
-          >
-            Explore Masterworks
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </motion.a>
-          <motion.button
-            onClick={onBookCall}
+          <a href="#projects" data-sound="open">
+            <NeonBorderButton variant="gold">
+              <span>Explore Masterworks</span>
+              <ArrowRight className="w-4 h-4 text-[#D4AF37] group-hover:translate-x-1 transition-transform" />
+            </NeonBorderButton>
+          </a>
+          <NeonBorderButton
+            variant="cyan"
             data-sound="click"
-            className="px-7 py-3.5 rounded-full bg-white/[0.04] border border-white/15 backdrop-blur-xl text-white text-sm font-medium hover:border-[#00F0FF]/60 hover:bg-[#00F0FF]/10 transition-all flex items-center gap-2 shadow-[0_0_20px_rgba(0,0,0,0.5)]"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.96 }}
+            onClick={onBookCall}
           >
             <Calendar className="w-4 h-4 text-[#00F0FF]" />
-            Schedule Discovery Session
-          </motion.button>
+            <span>Schedule Discovery Session</span>
+          </NeonBorderButton>
         </motion.div>
 
         {/* Core Architecture Tech Badges */}
@@ -432,35 +438,38 @@ const HeroSection = ({ onBookCall }: { onBookCall: () => void }) => {
 // Quest Map (Timeline) Section
 const QuestMapSection = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
 
   const experiences = [
     {
       period: '2024 - Present',
-      title: 'Full-Stack & AI Engineer',
+      title: 'Full-Stack & AI Systems Architect',
       company: 'Independent Consultant / Product Engineering',
-      description: 'Building product-facing web applications, automation flows, and AI-enabled business tools that solve real operational bottlenecks for clients and startups.',
-      skills: ['Product Engineering', 'AI Workflows', 'SaaS UX', 'System Design'],
+      description: 'Engineering zero-compromise distributed architectures, autonomous multi-agent swarms, and AI-enabled business tools that solve real operational bottlenecks for clients and enterprise products.',
+      skills: ['Distributed Systems', 'Autonomous AI Swarms', 'Next.js 15 & Fastify', 'Fintech Pipelines'],
       icon: Briefcase,
-      type: 'work'
+      type: 'work',
+      color: '#00F0FF'
     },
     {
       period: '2022 - 2024',
       title: 'Frontend & Full-Stack Developer',
       company: 'Digital Product Studio',
-      description: 'Delivered web platforms, dashboards, and internal tools using React, Node.js, and backend integrations for business and customer workflows.',
-      skills: ['React', 'Node.js', 'APIs', 'Database Design'],
+      description: 'Delivered mission-critical web platforms, high-throughput analytics dashboards, and internal business tools using React, Node.js, and strict API contracts.',
+      skills: ['React & TypeScript', 'Node.js & Python', 'OpenAPI Contracts', 'PostgreSQL Schema'],
       icon: Code2,
-      type: 'work'
+      type: 'work',
+      color: '#D4AF37'
     },
     {
       period: '2020 - 2024',
       title: 'Computer Science & Software Engineering',
       company: 'University Studies',
-      description: 'Focused on software engineering, algorithms, data structures, and modern application architecture with practical product implementation.',
-      skills: ['Algorithms', 'Data Structures', 'AI', 'Software Engineering'],
+      description: 'Rigorous theoretical foundations in software engineering, algorithmic complexity, data structures, and enterprise architecture with practical real-world implementations.',
+      skills: ['Algorithms', 'Data Structures', 'AI & Neural Systems', 'System Design'],
       icon: GraduationCap,
-      type: 'education'
+      type: 'education',
+      color: '#A855F7'
     },
   ];
 
@@ -473,84 +482,111 @@ const QuestMapSection = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           className="text-center mb-20"
         >
-          <span className="inline-block px-4 py-2 rounded-full glass text-[#D4AF37] text-sm font-medium mb-4">
-            <Sparkles className="w-4 h-4 inline mr-2" />
+          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-[#D4AF37] text-sm font-medium mb-4 border border-[#D4AF37]/20 bg-[#D4AF37]/10">
+            <Sparkles className="w-4 h-4 text-[#D4AF37]" />
             Career Journey
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">
-            Quest <span className="text-gradient-gold">Map</span>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white tracking-tight">
+            Quest <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500">Map</span>
           </h2>
-          <p className="text-white/40 max-w-xl mx-auto">
+          <p className="text-gray-400 max-w-xl mx-auto text-base">
             My professional adventure through the realms of code and innovation
           </p>
         </motion.div>
 
         {/* Timeline */}
         <div className="relative">
-          {/* Timeline Line */}
-          <motion.div
-            initial={{ scaleY: 0 }}
-            animate={isInView ? { scaleY: 1 } : {}}
-            transition={{ duration: 1.5, ease: 'easeOut' }}
-            className="absolute left-1/2 top-0 bottom-0 w-0.5 timeline-line origin-top hidden md:block"
-          />
+          {/* Glowing Animated Timeline Line */}
+          <div className="absolute left-1/2 top-0 bottom-0 w-[2px] bg-white/[0.08] -translate-x-1/2 origin-top hidden md:block overflow-hidden">
+            <motion.div
+              initial={{ height: 0 }}
+              animate={isInView ? { height: '100%' } : {}}
+              transition={{ duration: 1.5, ease: 'easeOut' }}
+              className="w-full bg-gradient-to-b from-[#00F0FF] via-[#D4AF37] to-[#A855F7] shadow-[0_0_12px_#00F0FF]"
+            />
+          </div>
 
           {/* Experience Cards */}
-          <div className="space-y-12">
+          <div className="space-y-16">
             {experiences.map((exp, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                initial={{ opacity: 0, x: index % 2 === 0 ? -40 : 40 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
                 className={`relative flex flex-col md:flex-row items-center gap-8 ${
                   index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
                 }`}
               >
-                {/* Content Card */}
-                <div className={`flex-1 ${index % 2 === 0 ? 'md:text-right' : 'md:text-left'}`}>
-                  <div className="glass-card rounded-2xl p-6 md:p-8 spotlight-container group">
-                    <div className="spotlight" />
-                    
-                    <div className={`flex items-center gap-3 mb-4 ${index % 2 === 0 ? 'md:justify-end' : ''}`}>
-                      <span className="px-3 py-1 rounded-full bg-[#D4AF37]/10 text-[#D4AF37] text-sm font-medium">
+                {/* Content Card with Cyber Glass & 3D Depth */}
+                <div className={`flex-1 w-full ${index % 2 === 0 ? 'md:text-right' : 'md:text-left'}`}>
+                  <motion.div 
+                    whileHover={{ y: -4, scale: 1.01 }}
+                    className="relative rounded-3xl p-6 md:p-8 bg-[#0a0d14]/85 border border-white/[0.1] backdrop-blur-xl shadow-2xl transition-all duration-300 group overflow-hidden"
+                  >
+                    {/* Hover Glow Orb */}
+                    <div 
+                      className="absolute -inset-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-3xl"
+                      style={{
+                        background: `radial-gradient(circle at ${index % 2 === 0 ? '100%' : '0%'} 50%, ${exp.color}15 0%, transparent 70%)`
+                      }}
+                    />
+
+                    <div className={`flex items-center gap-3 mb-4 flex-wrap ${index % 2 === 0 ? 'md:justify-end' : ''}`}>
+                      <span 
+                        className="px-3 py-1 rounded-full text-xs font-mono font-bold tracking-wider"
+                        style={{
+                          backgroundColor: `${exp.color}15`,
+                          color: exp.color,
+                          border: `1px solid ${exp.color}35`,
+                        }}
+                      >
                         {exp.period}
                       </span>
-                      <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                        exp.type === 'work' ? 'bg-[#00F0FF]/10 text-[#00F0FF]' : 'bg-purple-500/10 text-purple-400'
-                      }`}>
-                        {exp.type === 'work' ? 'Work' : 'Education'}
+                      <span className="px-3 py-1 rounded-full text-xs font-mono bg-white/[0.05] border border-white/[0.08] text-gray-300">
+                        {exp.type === 'work' ? 'SYSTEMS ARCHITECTURE' : 'ACADEMIC FOUNDATION'}
                       </span>
                     </div>
 
-                    <h3 className="text-xl font-bold text-white mb-1">{exp.title}</h3>
-                    <p className="text-[#D4AF37] font-medium mb-3">{exp.company}</p>
-                    <p className="text-white/50 text-sm mb-4">{exp.description}</p>
+                    <h3 className="text-xl md:text-2xl font-bold text-white mb-1.5 group-hover:text-cyan-300 transition-colors">
+                      {exp.title}
+                    </h3>
+                    <p className="font-medium text-sm mb-3 tracking-wide" style={{ color: exp.color }}>
+                      {exp.company}
+                    </p>
+                    <p className="text-gray-300 text-sm leading-relaxed mb-5">
+                      {exp.description}
+                    </p>
 
                     <div className={`flex flex-wrap gap-2 ${index % 2 === 0 ? 'md:justify-end' : ''}`}>
                       {exp.skills.map((skill) => (
                         <span
                           key={skill}
-                          className="px-2 py-1 rounded-md bg-white/5 text-white/60 text-xs"
+                          className="px-3 py-1 rounded-xl bg-white/[0.04] border border-white/[0.06] text-gray-300 text-xs font-mono group-hover:border-white/20 transition-colors"
                         >
                           {skill}
                         </span>
                       ))}
                     </div>
-                  </div>
-                </div>
-
-                {/* Center Icon */}
-                <div className="relative z-10">
-                  <motion.div
-                    whileHover={{ scale: 1.1, rotate: 10 }}
-                    className="w-14 h-14 rounded-full glass flex items-center justify-center glow-gold"
-                  >
-                    <exp.icon className="w-6 h-6 text-[#D4AF37]" />
                   </motion.div>
                 </div>
 
-                {/* Empty Space for Other Side */}
+                {/* Center Node Icon with Pulse */}
+                <div className="relative z-20 shrink-0">
+                  <motion.div
+                    whileHover={{ scale: 1.15, rotate: 5 }}
+                    className="w-14 h-14 rounded-2xl flex items-center justify-center border shadow-xl backdrop-blur-xl transition-all duration-300"
+                    style={{
+                      backgroundColor: '#0a0d14',
+                      borderColor: `${exp.color}60`,
+                      boxShadow: `0 0 20px ${exp.color}35`,
+                    }}
+                  >
+                    <exp.icon className="w-6 h-6" style={{ color: exp.color }} />
+                  </motion.div>
+                </div>
+
+                {/* Empty Counterpart for Symmetry */}
                 <div className="flex-1 hidden md:block" />
               </motion.div>
             ))}
@@ -561,44 +597,24 @@ const QuestMapSection = () => {
   );
 };
 
-// Tech Stack Section
+
+// Tech Stack Section with Originkit InteractiveGrid
 const TechStackSection = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
+  const [activeCategory, setActiveCategory] = useState<'all' | 'frontend' | 'backend' | 'ai' | 'tools'>('all');
+
+  const filteredItems = useMemo(() => {
+    if (activeCategory === 'all') return TECH_ITEMS;
+    return TECH_ITEMS.filter((item) => item.category === activeCategory);
+  }, [activeCategory]);
 
   const categories = [
-    {
-      name: 'Frontend',
-      percentage: 95,
-      icon: Layers,
-      color: '#D4AF37',
-      technologies: ['React', 'Vue.js', 'TypeScript', 'Tailwind CSS', 'Next.js', 'Redux']
-    },
-    {
-      name: 'Backend',
-      percentage: 90,
-      icon: Server,
-      color: '#00F0FF',
-      technologies: ['Node.js', 'Python', 'FastAPI', 'PostgreSQL', 'MongoDB', 'Redis']
-    },
-    {
-      name: 'AI & Tools',
-      percentage: 92,
-      icon: Brain,
-      color: '#A855F7',
-      technologies: ['TensorFlow', 'PyTorch', 'OpenAI API', 'LangChain', 'Docker', 'AWS']
-    },
-  ];
-
-  const tools = [
-    { name: 'React', icon: Atom, color: '#61DAFB' },
-    { name: 'TypeScript', icon: FileCode2, color: '#3178C6' },
-    { name: 'Python', icon: Braces, color: '#3776AB' },
-    { name: 'Node.js', icon: Hexagon, color: '#3C873A' },
-    { name: 'PostgreSQL', icon: Database, color: '#336791' },
-    { name: 'Docker', icon: Package, color: '#0DB7ED' },
-    { name: 'AWS', icon: Cloud, color: '#FF9900' },
-    { name: 'TensorFlow', icon: Brain, color: '#FF6F00' },
+    { id: 'all', label: 'All Arsenals', count: TECH_ITEMS.length },
+    { id: 'frontend', label: 'Frontend', count: TECH_ITEMS.filter(t => t.category === 'frontend').length },
+    { id: 'backend', label: 'Backend', count: TECH_ITEMS.filter(t => t.category === 'backend').length },
+    { id: 'ai', label: 'AI & Neural', count: TECH_ITEMS.filter(t => t.category === 'ai').length },
+    { id: 'tools', label: 'DevOps & Tools', count: TECH_ITEMS.filter(t => t.category === 'tools').length },
   ];
 
   return (
@@ -608,102 +624,58 @@ const TechStackSection = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          className="text-center mb-20"
+          className="text-center mb-14"
         >
-          <span className="inline-block px-4 py-2 rounded-full glass text-[#00F0FF] text-sm font-medium mb-4">
-            <Terminal className="w-4 h-4 inline mr-2" />
-            Arsenal
+          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-[#00F0FF] text-sm font-medium mb-4 border border-[#00F0FF]/20 bg-[#00F0FF]/10">
+            <Terminal className="w-4 h-4 text-[#00F0FF]" />
+            Interactive 3D Arsenal
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">
-            Tech <span className="text-gradient-cyan">Stack</span>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white tracking-tight">
+            Tech <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400">Stack</span>
           </h2>
-          <p className="text-white/40 max-w-xl mx-auto">
-            Technologies I wield to craft digital excellence
+          <p className="text-gray-400 max-w-xl mx-auto text-base">
+            Technologies I wield to craft digital excellence — interactive physics grid
           </p>
         </motion.div>
 
-        {/* Skills Grid */}
-        <div className="grid md:grid-cols-3 gap-6 mb-16">
-          {categories.map((category, index) => (
-            <motion.div
-              key={category.name}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: index * 0.1 }}
-              className="glass-card rounded-2xl p-6 md:p-8 group"
-            >
-              <div className="flex items-center gap-4 mb-6">
-                <div 
-                  className="w-12 h-12 rounded-xl flex items-center justify-center"
-                  style={{ backgroundColor: `${category.color}15` }}
-                >
-                  <category.icon className="w-6 h-6" style={{ color: category.color }} />
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold text-white">{category.name}</h3>
-                  <span className="text-2xl font-bold" style={{ color: category.color }}>
-                    {category.percentage}%
-                  </span>
-                </div>
-              </div>
-
-              {/* Progress Bar */}
-              <div className="h-2 bg-white/10 rounded-full overflow-hidden mb-6">
-                <motion.div
-                  initial={{ width: 0 }}
-                  animate={isInView ? { width: `${category.percentage}%` } : {}}
-                  transition={{ duration: 1.5, delay: 0.5 + index * 0.1, ease: 'easeOut' }}
-                  className="h-full rounded-full"
-                  style={{ backgroundColor: category.color }}
-                />
-              </div>
-
-              {/* Technologies */}
-              <div className="flex flex-wrap gap-2">
-                {category.technologies.map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-3 py-1 rounded-full bg-white/5 text-white/60 text-xs hover:bg-white/10 transition-colors"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-          ))}
+        {/* Category Filter Tabs */}
+        <div className="flex items-center justify-center flex-wrap gap-2.5 mb-10">
+          {categories.map((cat) => {
+            const isActive = activeCategory === cat.id;
+            return (
+              <button
+                key={cat.id}
+                onClick={() => setActiveCategory(cat.id as any)}
+                className={`px-4 py-2 rounded-xl text-xs font-mono font-medium transition-all duration-300 flex items-center gap-2 ${
+                  isActive
+                    ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-400/50 shadow-[0_0_15px_rgba(0,240,255,0.2)]'
+                    : 'bg-white/[0.04] text-gray-400 border border-white/[0.06] hover:bg-white/[0.08] hover:text-white'
+                }`}
+              >
+                <span>{cat.label}</span>
+                <span className={`px-1.5 py-0.2 rounded-md text-[10px] ${
+                  isActive ? 'bg-cyan-400/30 text-white' : 'bg-white/10 text-gray-400'
+                }`}>
+                  {cat.count}
+                </span>
+              </button>
+            );
+          })}
         </div>
 
-        {/* Tools Grid */}
+        {/* 3D Interactive Grid Engine */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.4 }}
-          className="glass rounded-2xl p-8"
+          transition={{ duration: 0.5 }}
         >
-          <h3 className="text-xl font-bold text-white mb-6 text-center">Tools & Technologies</h3>
-          <div className="grid grid-cols-4 md:grid-cols-8 gap-4">
-            {tools.map((tool, index) => (
-              <motion.div
-                key={tool.name}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ delay: 0.5 + index * 0.05 }}
-                whileHover={{ scale: 1.1, y: -5 }}
-                className="flex flex-col items-center gap-2 p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors cursor-default group"
-              >
-                <tool.icon
-                  className="w-7 h-7 group-hover:scale-110 transition-transform"
-                  style={{ color: tool.color }}
-                />
-                <span className="text-xs text-white/60 text-center">{tool.name}</span>
-              </motion.div>
-            ))}
-          </div>
+          <InteractiveGrid items={filteredItems} columns={4} gap={18} />
         </motion.div>
       </div>
     </section>
   );
 };
+
 
 // Project Showcase Section
 const ProjectShowcaseSection = ({ onOpenProject }: { onOpenProject: (p: Project) => void }) => {
@@ -734,153 +706,37 @@ const ProjectShowcaseSection = ({ onOpenProject }: { onOpenProject: (p: Project)
           </p>
         </motion.div>
 
-        {/* Projects Grid */}
-        <div className="grid md:grid-cols-3 gap-6">
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.title}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: index * 0.15 }}
-              className="group h-full"
-            >
-              <SpatialTiltCard
-                holographic={true}
-                maxTilt={12}
-                depthScale={1.03}
-                className="h-full cursor-pointer"
-                onClick={() => onOpenProject(project)}
-              >
-                <div
-                  role="button"
-                  tabIndex={0}
-                  data-sound="open"
-                  data-sound-hover="true"
-                  className="glass-card rounded-2xl overflow-hidden h-full flex flex-col justify-between"
-                  style={{ transformStyle: 'preserve-3d' }}
-                  onKeyDown={(event) => {
-                    if (event.key === 'Enter' || event.key === ' ') {
-                      event.preventDefault();
-                      onOpenProject(project);
-                    }
-                  }}
-                >
-                  {/* Project Visual */}
-                  <div 
-                    className="h-44 flex items-center justify-center relative overflow-hidden"
-                    style={{ backgroundColor: `${project.color}10`, transformStyle: 'preserve-3d' }}
-                  >
-                    <motion.div
-                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                      style={{
-                        background: `radial-gradient(circle at 50% 50%, ${project.color}25 0%, transparent 70%)`
-                      }}
-                    />
-                    {/* Grid overlay inside visual */}
-                    <div className="absolute inset-0 grid-pattern opacity-60" />
-                    
-                    <div
-                      className="relative z-10 w-16 h-16 rounded-2xl flex items-center justify-center transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3"
-                      style={{
-                        backgroundColor: `${project.color}18`,
-                        border: `1px solid ${project.color}40`,
-                        boxShadow: `0 0 40px ${project.color}30`,
-                        transform: 'translateZ(38px)',
-                      }}
-                    >
-                      <project.icon className="w-8 h-8" style={{ color: project.color }} />
-                    </div>
-
-                    {/* Live demo hint */}
-                    <div
-                      className="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity shadow-lg"
-                      style={{ transform: 'translateZ(45px)' }}
-                    >
-                      <Play className="w-3 h-3" style={{ color: project.color }} />
-                      <span className="text-[10px] font-medium text-white/90">Live Demo</span>
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="p-6 flex-1 flex flex-col justify-between" style={{ transformStyle: 'preserve-3d' }}>
-                    <div style={{ transform: 'translateZ(24px)' }}>
-                      <h3 className="text-xl font-bold text-white mb-2 group-hover:text-[#D4AF37] transition-colors">
-                        {project.title}
-                      </h3>
-                      <p className="text-white/50 text-sm mb-4 line-clamp-3">
-                        {project.description}
-                      </p>
-
-                      {/* Tags */}
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {project.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="px-2 py-1 rounded-md text-xs"
-                            style={{ backgroundColor: `${project.color}15`, color: project.color }}
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Actions */}
-                    <div className="flex gap-3 pt-2" style={{ transform: 'translateZ(32px)' }}>
-                      <motion.button
-                        data-sound="open"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          onOpenProject(project);
-                        }}
-                        whileHover={{ scale: 1.03 }}
-                        whileTap={{ scale: 0.97 }}
-                        className="flex-1 py-2.5 rounded-lg text-sm font-semibold text-center flex items-center justify-center gap-2 transition-colors shadow-md"
-                        style={{ backgroundColor: project.color, color: '#000' }}
-                      >
-                        <Play className="w-4 h-4" />
-                        Live Demo
-                      </motion.button>
-                      <motion.button
-                        data-sound="open"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          onOpenProject(project);
-                        }}
-                        whileHover={{ scale: 1.03 }}
-                        whileTap={{ scale: 0.97 }}
-                        className="flex-1 py-2.5 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 text-white/70 text-sm font-medium text-center flex items-center justify-center gap-2 transition-colors"
-                      >
-                        <ChevronRight className="w-4 h-4" />
-                        Case Study
-                      </motion.button>
-                    </div>
-                  </div>
-                </div>
-              </SpatialTiltCard>
-            </motion.div>
-          ))}
-        </div>
+        {/* Originkit 3D Flip Card Gallery Engine */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7 }}
+        >
+          <FlipGallery3D
+            projects={projects}
+            onOpenProject={onOpenProject}
+          />
+        </motion.div>
       </div>
     </section>
   );
 };
 
 // Budget Calculator Section
+// Budget Calculator Section
 const BudgetCalculatorSection = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
 
   const services = [
-    { id: 'frontend', name: 'Frontend Development', price: 150, icon: Palette },
-    { id: 'backend', name: 'Backend Development', price: 200, icon: Server },
-    { id: 'ai', name: 'AI Integration', price: 300, icon: Brain },
-    { id: 'database', name: 'Database Design', price: 100, icon: Database },
-    { id: 'api', name: 'API Development', price: 150, icon: Globe },
-    { id: 'devops', name: 'DevOps & Deployment', price: 120, icon: Cloud },
+    { id: 'frontend', name: 'Frontend Development', price: 150, icon: Palette, note: 'Next.js 15, Three.js & Tailwind' },
+    { id: 'backend', name: 'Backend Development', price: 200, icon: Server, note: 'FastAPI, Node.js & PostgreSQL' },
+    { id: 'ai', name: 'AI Integration', price: 300, icon: Brain, note: 'Gemini, OpenAI & Autonomous Agents' },
+    { id: 'database', name: 'Database Design', price: 100, icon: Database, note: 'High-scale schema & indexing' },
+    { id: 'api', name: 'API Development', price: 150, icon: Globe, note: 'Type-safe REST & OpenAPI specs' },
+    { id: 'devops', name: 'DevOps & Deployment', price: 120, icon: Cloud, note: 'Docker, CI/CD & Monitoring' },
   ];
 
-  // Pre-selected so visitors see a realistic Uzbekistan-adapted estimate
   const [selectedServices, setSelectedServices] = useState<string[]>([
     'frontend',
     'backend',
@@ -890,18 +746,18 @@ const BudgetCalculatorSection = () => {
   const complexityMultipliers = {
     simple: 0.7,
     medium: 1,
-    complex: 1.5
+    complex: 1.5,
   };
 
   const toggleService = (id: string) => {
-    setSelectedServices(prev =>
-      prev.includes(id) ? prev.filter(s => s !== id) : [...prev, id]
+    setSelectedServices((prev) =>
+      prev.includes(id) ? prev.filter((s) => s !== id) : [...prev, id]
     );
   };
 
   const calculateTotal = () => {
     const basePrice = selectedServices.reduce((total, id) => {
-      const service = services.find(s => s.id === id);
+      const service = services.find((s) => s.id === id);
       return total + (service?.price || 0);
     }, 0);
     return Math.round(basePrice * complexityMultipliers[complexity]);
@@ -922,14 +778,14 @@ const BudgetCalculatorSection = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           className="text-center mb-16"
         >
-          <span className="inline-block px-4 py-2 rounded-full glass text-[#00F0FF] text-sm font-medium mb-4">
-            <Bot className="w-4 h-4 inline mr-2" />
+          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-[#00F0FF] text-sm font-medium mb-4 border border-[#00F0FF]/20 bg-[#00F0FF]/10">
+            <Bot className="w-4 h-4 text-[#00F0FF]" />
             Project Estimator
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">
-            Budget <span className="text-gradient-cyan">Calculator</span>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white tracking-tight">
+            Budget <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400">Calculator</span>
           </h2>
-          <p className="text-white/40 max-w-xl mx-auto">
+          <p className="text-gray-400 max-w-xl mx-auto text-base">
             Get an instant estimate for your project scope
           </p>
         </motion.div>
@@ -939,132 +795,160 @@ const BudgetCalculatorSection = () => {
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            className="min-w-0 glass rounded-2xl p-6 md:p-8"
+            className="min-w-0 rounded-3xl p-6 md:p-8 bg-[#0a0d14]/85 border border-white/[0.1] backdrop-blur-xl shadow-2xl"
           >
-            <h3 className="text-xl font-bold text-white mb-6">Select Services</h3>
-            <div className="space-y-3">
-              {services.map((service, index) => (
-                <motion.button
-                  key={service.id}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ delay: index * 0.05 }}
-                  onClick={() => toggleService(service.id)}
-                  className={`w-full p-4 rounded-xl flex items-center justify-between transition-all ${
-                    selectedServices.includes(service.id)
-                      ? 'bg-[#D4AF37]/20 border border-[#D4AF37]/50'
-                      : 'bg-white/5 hover:bg-white/10 border border-transparent'
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    <service.icon className={`w-5 h-5 ${
-                      selectedServices.includes(service.id) ? 'text-[#D4AF37]' : 'text-white/50'
-                    }`} />
-                    <span className={selectedServices.includes(service.id) ? 'text-white' : 'text-white/70'}>
-                      {service.name}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <span className="text-white/50 text-sm">${service.price.toLocaleString()}</span>
-                    <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                      selectedServices.includes(service.id)
-                        ? 'border-[#D4AF37] bg-[#D4AF37]'
-                        : 'border-white/30'
-                    }`}>
-                      {selectedServices.includes(service.id) && (
-                        <CheckCircle2 className="w-3 h-3 text-black" />
-                      )}
-                    </div>
-                  </div>
-                </motion.button>
-              ))}
-            </div>
+            <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
+              <span>Select Services</span>
+              <span className="text-xs font-mono text-cyan-400 px-2 py-0.5 rounded-full bg-cyan-400/10 border border-cyan-400/20">
+                {selectedServices.length} active
+              </span>
+            </h3>
 
-            {/* Complexity Selection */}
-            <div className="mt-8">
-              <h4 className="text-sm font-medium text-white/60 mb-3">Project Complexity</h4>
-              <div className="flex gap-2">
-                {(['simple', 'medium', 'complex'] as const).map((level) => (
-                  <button
-                    key={level}
-                    onClick={() => setComplexity(level)}
-                    className={`flex-1 py-2 rounded-lg text-sm font-medium capitalize transition-all ${
-                      complexity === level
-                        ? 'bg-[#00F0FF] text-black'
-                        : 'bg-white/5 text-white/60 hover:bg-white/10'
+            <div className="space-y-3">
+              {services.map((service, index) => {
+                const isSelected = selectedServices.includes(service.id);
+                return (
+                  <motion.button
+                    key={service.id}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={isInView ? { opacity: 1, x: 0 } : {}}
+                    transition={{ delay: index * 0.05 }}
+                    onClick={() => toggleService(service.id)}
+                    className={`w-full p-4 rounded-2xl flex items-center justify-between transition-all duration-300 border ${
+                      isSelected
+                        ? 'bg-[#141b2b] border-cyan-400/50 shadow-[0_0_15px_rgba(0,240,255,0.15)]'
+                        : 'bg-white/[0.03] hover:bg-white/[0.06] border-white/[0.06]'
                     }`}
                   >
-                    {level}
-                  </button>
-                ))}
+                    <div className="flex items-center gap-3.5 text-left">
+                      <div 
+                        className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${
+                          isSelected ? 'bg-cyan-400 text-black font-bold' : 'bg-white/[0.05] text-gray-400'
+                        }`}
+                      >
+                        <service.icon className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <div className="font-medium text-white text-sm">{service.name}</div>
+                        <div className="text-[11px] text-gray-400 font-mono">{service.note}</div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-mono font-semibold text-gray-300">
+                        ${service.price}
+                      </span>
+                      <div 
+                        className={`w-5 h-5 rounded-full flex items-center justify-center border transition-all ${
+                          isSelected
+                            ? 'bg-cyan-400 border-cyan-400 text-black'
+                            : 'border-white/20'
+                        }`}
+                      >
+                        {isSelected && <CheckCircle2 className="w-3.5 h-3.5" />}
+                      </div>
+                    </div>
+                  </motion.button>
+                );
+              })}
+            </div>
+
+            {/* Complexity Picker */}
+            <div className="mt-8 pt-6 border-t border-white/[0.08]">
+              <h4 className="text-sm font-bold text-gray-300 uppercase tracking-wider mb-3 font-mono">
+                Project Complexity
+              </h4>
+              <div className="grid grid-cols-3 gap-2.5">
+                {(['simple', 'medium', 'complex'] as const).map((level) => {
+                  const isActive = complexity === level;
+                  return (
+                    <button
+                      key={level}
+                      onClick={() => setComplexity(level)}
+                      className={`p-3 rounded-xl text-xs font-mono capitalize transition-all border ${
+                        isActive
+                          ? 'bg-cyan-400/20 text-cyan-300 border-cyan-400/50 shadow-[0_0_12px_rgba(0,240,255,0.2)]'
+                          : 'bg-white/[0.03] text-gray-400 border-white/[0.06] hover:bg-white/[0.06]'
+                      }`}
+                    >
+                      {level}
+                    </button>
+                  );
+                })}
               </div>
             </div>
           </motion.div>
 
-          {/* Estimate Display */}
+          {/* Results Summary Card */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ delay: 0.2 }}
-            className="min-w-0 glass rounded-2xl p-6 md:p-8 flex flex-col"
+            className="min-w-0 rounded-3xl p-6 md:p-8 bg-[#0a0d14]/90 border border-white/[0.1] backdrop-blur-2xl shadow-2xl flex flex-col justify-between relative overflow-hidden"
           >
-            <h3 className="text-xl font-bold text-white mb-6">Project Estimate</h3>
+            <div 
+              className="absolute -right-20 -bottom-20 w-80 h-80 rounded-full blur-3xl opacity-20 pointer-events-none bg-cyan-400"
+            />
 
-            <div className="flex-1 space-y-6">
-              {/* Estimated Budget */}
-              <div className="p-6 rounded-xl bg-gradient-to-br from-[#D4AF37]/10 to-transparent border border-[#D4AF37]/20">
-                <p className="text-white/60 text-sm mb-1">Estimated Budget</p>
-                <motion.p
-                  key={calculateTotal()}
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  className="text-4xl md:text-5xl font-bold text-gradient-gold"
-                >
-                  ${calculateTotal().toLocaleString()}
-                </motion.p>
-              </div>
+            <div className="relative z-10">
+              <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                <Sparkles className="w-5 h-5 text-amber-400" />
+                Estimated Scope & Investment
+              </h3>
 
-              {/* Estimated Timeline */}
-              <div className="p-6 rounded-xl bg-gradient-to-br from-[#00F0FF]/10 to-transparent border border-[#00F0FF]/20">
-                <p className="text-white/60 text-sm mb-1">Estimated Timeline</p>
-                <motion.p
-                  key={calculateTimeline()}
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  className="text-4xl md:text-5xl font-bold text-gradient-cyan"
-                >
-                  {calculateTimeline()} weeks
-                </motion.p>
-              </div>
-
-              {/* Selected Summary */}
-              {selectedServices.length > 0 && (
-                <div className="p-4 rounded-xl bg-white/5">
-                  <p className="text-white/60 text-sm mb-2">Selected Services:</p>
-                  <div className="flex flex-wrap gap-2">
-                    {selectedServices.map((id) => {
-                      const service = services.find(s => s.id === id);
-                      return (
-                        <span key={id} className="px-2 py-1 rounded-md bg-[#D4AF37]/20 text-[#D4AF37] text-xs">
-                          {service?.name}
-                        </span>
-                      );
-                    })}
+              <div className="grid grid-cols-2 gap-4 mb-8">
+                <div className="p-5 rounded-2xl bg-white/[0.04] border border-white/[0.06]">
+                  <div className="text-xs text-gray-400 uppercase tracking-widest font-mono mb-1">
+                    Estimated Budget
                   </div>
+                  <div className="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500 font-mono">
+                    ${calculateTotal()}
+                  </div>
+                  <div className="text-[11px] text-gray-400 mt-1">USD (Transparent pricing)</div>
                 </div>
-              )}
+
+                <div className="p-5 rounded-2xl bg-white/[0.04] border border-white/[0.06]">
+                  <div className="text-xs text-gray-400 uppercase tracking-widest font-mono mb-1">
+                    Estimated Timeline
+                  </div>
+                  <div className="text-3xl md:text-4xl font-extrabold text-cyan-400 font-mono">
+                    {calculateTimeline()} <span className="text-lg font-normal text-gray-400">weeks</span>
+                  </div>
+                  <div className="text-[11px] text-gray-400 mt-1">Sprints & milestones</div>
+                </div>
+              </div>
+
+              {/* Selected List Pills */}
+              <div className="mb-8">
+                <div className="text-xs text-gray-400 font-mono uppercase tracking-wider mb-2.5">
+                  Included Deliverables:
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {selectedServices.map((id) => {
+                    const s = services.find((srv) => srv.id === id);
+                    return (
+                      <span
+                        key={id}
+                        className="px-3 py-1 rounded-lg text-xs font-mono bg-cyan-400/10 text-cyan-300 border border-cyan-400/20"
+                      >
+                        ✓ {s?.name}
+                      </span>
+                    );
+                  })}
+                  {selectedServices.length === 0 && (
+                    <span className="text-xs text-gray-400">Select at least one service above.</span>
+                  )}
+                </div>
+              </div>
             </div>
 
-            {/* CTA */}
-            <motion.a
-              href="#contact"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="mt-6 w-full py-4 rounded-xl btn-primary text-black font-semibold text-center flex items-center justify-center gap-2"
-            >
-              <Send className="w-5 h-5" />
-              Get Detailed Quote
-            </motion.a>
+            <div className="relative z-10 pt-6 border-t border-white/[0.08]">
+              <a
+                href="#contact"
+                className="w-full py-4 rounded-2xl bg-gradient-to-r from-cyan-400 to-emerald-400 text-black font-bold text-center block text-sm tracking-wide shadow-[0_0_20px_rgba(0,240,255,0.3)] hover:brightness-110 transition-all"
+              >
+                Let's Build Something Exceptional ➔
+              </a>
+            </div>
           </motion.div>
         </div>
       </div>
@@ -1072,7 +956,7 @@ const BudgetCalculatorSection = () => {
   );
 };
 
-// Contact Section
+
 const ContactSection = ({ onBookCall }: { onBookCall: () => void }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });

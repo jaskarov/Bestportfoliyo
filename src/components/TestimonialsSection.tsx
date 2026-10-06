@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+﻿import { useEffect, useRef, useState } from 'react';
 import { motion, useInView, animate, AnimatePresence } from 'framer-motion';
 import {
   Quote,
@@ -9,6 +9,7 @@ import {
   Timer,
   FolderKanban,
   Users,
+  Sparkles,
 } from 'lucide-react';
 
 /* ---------------------------------- Metrics ---------------------------------- */
@@ -34,7 +35,7 @@ const metrics: Metric[] = [
   },
   {
     icon: Timer,
-    value: 47,
+    value: 45,
     prefix: '<',
     suffix: 'ms',
     label: 'Average API response time',
@@ -42,7 +43,7 @@ const metrics: Metric[] = [
   },
   {
     icon: FolderKanban,
-    value: 30,
+    value: 28,
     suffix: '+',
     label: 'Projects delivered end-to-end',
     color: '#D4AF37',
@@ -58,13 +59,13 @@ const metrics: Metric[] = [
 
 const Counter = ({ metric }: { metric: Metric }) => {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: '-50px' });
-  const [display, setDisplay] = useState(0);
+  const inView = useInView(ref, { once: true, amount: 0.1 });
+  const [display, setDisplay] = useState(metric.value);
 
   useEffect(() => {
     if (!inView) return;
     const controls = animate(0, metric.value, {
-      duration: 2,
+      duration: 1.8,
       ease: [0.16, 1, 0.3, 1],
       onUpdate: (v) => setDisplay(v),
     });
@@ -141,7 +142,7 @@ const testimonials: Testimonial[] = [
 
 export const TestimonialsSection = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(1);
   const [paused, setPaused] = useState(false);
@@ -168,42 +169,60 @@ export const TestimonialsSection = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           className="text-center mb-16"
         >
-          <span className="inline-block px-4 py-2 rounded-full glass text-[#22C55E] text-sm font-medium mb-4">
-            <ShieldCheck className="w-4 h-4 inline mr-2" />
-            Proven Results
+          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-[#22C55E] text-sm font-medium mb-4 border border-[#22C55E]/20 bg-[#22C55E]/10">
+            <ShieldCheck className="w-4 h-4 text-[#22C55E]" />
+            Proven Engineering Results
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">
-            Client <span className="text-gradient-cyan">Outcomes</span>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white tracking-tight">
+            Client <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-emerald-400 to-amber-300">Outcomes</span>
           </h2>
-          <p className="text-white/40 max-w-xl mx-auto">
-            Numbers first — then the people behind them
+          <p className="text-gray-400 max-w-xl mx-auto text-base">
+            Numbers first — verified metrics and the leaders behind them
           </p>
         </motion.div>
 
-        {/* Metrics */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-20">
+        {/* Metrics Grid with Cyber Glass & Neon Aura */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-20">
           {metrics.map((metric, i) => (
             <motion.div
               key={metric.label}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: i * 0.1 }}
-              className="glass-card rounded-2xl p-6 text-center group relative overflow-hidden"
+              whileHover={{ y: -6, scale: 1.02 }}
+              className="relative rounded-2xl p-6 text-center group overflow-hidden bg-[#0a0d14]/80 border border-white/[0.08] backdrop-blur-xl shadow-xl transition-all duration-300"
             >
               <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                 style={{
-                  background: `radial-gradient(circle at 50% 120%, ${metric.color}15 0%, transparent 70%)`,
+                  background: `radial-gradient(circle at 50% 0%, ${metric.color}25 0%, transparent 70%)`,
                 }}
               />
-              <metric.icon
-                className="w-6 h-6 mx-auto mb-3"
-                style={{ color: metric.color }}
-              />
-              <p className="text-3xl md:text-4xl font-bold text-white mb-1.5 tabular-nums">
+              <div 
+                className="w-12 h-12 rounded-xl mx-auto mb-4 flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
+                style={{
+                  backgroundColor: `${metric.color}15`,
+                  border: `1px solid ${metric.color}30`,
+                }}
+              >
+                <metric.icon
+                  className="w-6 h-6"
+                  style={{ color: metric.color }}
+                />
+              </div>
+              <p 
+                className="text-3xl md:text-4xl font-extrabold text-white mb-2 tabular-nums tracking-tight"
+                style={{ textShadow: `0 0 20px ${metric.color}40` }}
+              >
                 <Counter metric={metric} />
               </p>
-              <p className="text-xs text-white/40">{metric.label}</p>
+              <p className="text-xs text-gray-400 font-medium">{metric.label}</p>
+              
+              {/* Bottom accent glow bar */}
+              <div 
+                className="absolute bottom-0 left-1/4 right-1/4 h-[2px] rounded-full opacity-30 group-hover:opacity-100 transition-opacity"
+                style={{ backgroundColor: metric.color, boxShadow: `0 0 8px ${metric.color}` }}
+              />
             </motion.div>
           ))}
         </div>
@@ -217,73 +236,68 @@ export const TestimonialsSection = () => {
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
         >
-          <div className="glass-card rounded-3xl p-8 md:p-12 relative overflow-hidden">
+          <div className="relative rounded-3xl p-8 md:p-12 overflow-hidden bg-[#0a0d14]/90 border border-white/[0.1] backdrop-blur-2xl shadow-2xl">
             {/* Giant quote mark */}
             <Quote
-              className="absolute -top-4 -left-2 w-32 h-32 text-white/[0.03] rotate-180"
+              className="absolute -top-4 -left-2 w-32 h-32 text-white/[0.03] rotate-180 pointer-events-none"
               strokeWidth={1}
             />
 
-            <div className="min-h-[220px] md:min-h-[180px] flex items-center">
+            {/* Subtle glow orb */}
+            <div 
+              className="absolute -right-20 -bottom-20 w-80 h-80 rounded-full blur-3xl opacity-20 pointer-events-none"
+              style={{ backgroundColor: current.color }}
+            />
+
+            <div className="min-h-[220px] md:min-h-[180px] flex items-center relative z-10">
               <AnimatePresence mode="wait" custom={direction}>
                 <motion.figure
                   key={index}
                   custom={direction}
-                  initial={{ opacity: 0, x: 60 * direction }}
+                  initial={{ opacity: 0, x: 50 * direction }}
                   animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -60 * direction }}
-                  transition={{ duration: 0.45, ease: 'easeOut' }}
-                  className="relative z-10 w-full"
+                  exit={{ opacity: 0, x: -50 * direction }}
+                  transition={{ duration: 0.4, ease: 'easeOut' }}
+                  className="w-full"
                 >
-                  {/* Stars */}
-                  <div className="flex gap-1 mb-5">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <Star
-                        key={i}
-                        className="w-4 h-4 fill-[#D4AF37] text-[#D4AF37]"
-                      />
-                    ))}
-                  </div>
-
-                  <blockquote className="text-lg md:text-xl text-white/80 leading-relaxed mb-8 max-w-3xl">
+                  <blockquote className="text-lg md:text-2xl text-gray-200 font-normal leading-relaxed mb-8">
                     "{current.quote}"
                   </blockquote>
 
-                  <figcaption className="flex flex-wrap items-center gap-4">
-                    <div
-                      className="w-12 h-12 rounded-full flex items-center justify-center font-bold text-sm"
-                      style={{
-                        background: `linear-gradient(135deg, ${current.color}40, ${current.color}15)`,
-                        border: `1px solid ${current.color}50`,
-                        color: current.color,
-                      }}
-                    >
-                      {current.initials}
+                  <figcaption className="flex items-center justify-between flex-wrap gap-4 pt-6 border-t border-white/[0.08]">
+                    <div className="flex items-center gap-4">
+                      <div
+                        className="w-12 h-12 rounded-xl flex items-center justify-center font-bold text-sm text-black shadow-lg"
+                        style={{ backgroundColor: current.color }}
+                      >
+                        {current.initials}
+                      </div>
+                      <div>
+                        <div className="font-semibold text-white flex items-center gap-2">
+                          {current.name}
+                          <span className="inline-flex items-center text-[11px] font-mono font-medium px-2 py-0.5 rounded-full border border-white/10 text-gray-400">
+                            {current.project}
+                          </span>
+                        </div>
+                        <div className="text-xs text-gray-400">
+                          {current.role} — <span className="text-gray-300">{current.company}</span>
+                        </div>
+                      </div>
                     </div>
-                    <div>
-                      <p className="font-semibold text-white">{current.name}</p>
-                      <p className="text-sm text-white/40">
-                        {current.role} — {current.company}
-                      </p>
+
+                    <div className="flex items-center gap-1 text-amber-400">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="w-4 h-4 fill-amber-400" />
+                      ))}
                     </div>
-                    <span
-                      className="ml-auto hidden sm:inline-block px-3 py-1.5 rounded-lg text-xs font-medium"
-                      style={{
-                        backgroundColor: `${current.color}12`,
-                        color: current.color,
-                        border: `1px solid ${current.color}30`,
-                      }}
-                    >
-                      {current.project}
-                    </span>
                   </figcaption>
                 </motion.figure>
               </AnimatePresence>
             </div>
 
-            {/* Controls */}
-            <div className="flex items-center justify-between mt-8 pt-6 border-t border-white/10">
-              <div className="flex gap-2">
+            {/* Slider controls */}
+            <div className="flex items-center justify-between mt-8 pt-6 border-t border-white/[0.06] relative z-10">
+              <div className="flex items-center gap-2">
                 {testimonials.map((_, i) => (
                   <button
                     key={i}
@@ -291,33 +305,31 @@ export const TestimonialsSection = () => {
                       setDirection(i > index ? 1 : -1);
                       setIndex(i);
                     }}
-                    data-active={i === index}
-                    className={`touch-dot h-1.5 rounded-full transition-all duration-300 ${
-                      i === index ? 'w-8 bg-[#D4AF37]' : 'w-1.5 bg-white/20 hover:bg-white/40'
+                    className={`h-1.5 rounded-full transition-all duration-300 ${
+                      i === index
+                        ? 'w-8 bg-gradient-to-r from-cyan-400 to-emerald-400'
+                        : 'w-2 bg-white/20 hover:bg-white/40'
                     }`}
-                    aria-label={`Testimonial ${i + 1}`}
+                    aria-label={`Go to slide ${i + 1}`}
                   />
                 ))}
               </div>
-              <div className="flex gap-2">
-                <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
+
+              <div className="flex items-center gap-2">
+                <button
                   onClick={() => go(-1)}
-                  className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors"
+                  className="p-2.5 rounded-xl border border-white/10 bg-white/[0.04] text-white hover:bg-white/10 transition-colors"
                   aria-label="Previous testimonial"
                 >
-                  <ChevronLeft className="w-4 h-4 text-white/70" />
-                </motion.button>
-                <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
+                <button
                   onClick={() => go(1)}
-                  className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors"
+                  className="p-2.5 rounded-xl border border-white/10 bg-white/[0.04] text-white hover:bg-white/10 transition-colors"
                   aria-label="Next testimonial"
                 >
-                  <ChevronRight className="w-4 h-4 text-white/70" />
-                </motion.button>
+                  <ChevronRight className="w-4 h-4" />
+                </button>
               </div>
             </div>
           </div>
