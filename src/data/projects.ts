@@ -46,8 +46,8 @@ export const projects: Project[] = [
       { label: 'k6 Throughput', value: '177 RPS' },
       { label: 'Vector Search', value: '42ms' },
     ],
-    repo: 'https://github.com/salomh46-rgb/docupulse-ai',
-    demo: 'https://github.com/salomh46-rgb/docupulse-ai#readme',
+    repo: 'https://github.com/jaskarov/docupulse-ai',
+    demo: 'https://github.com/jaskarov/docupulse-ai#readme',
   },
   {
     id: 'dentamed-atelier',
@@ -73,7 +73,7 @@ export const projects: Project[] = [
       { label: 'Reception Speed', value: '+70%' },
       { label: 'Interactive Teeth', value: '32 FDI' },
     ],
-    repo: 'https://github.com/salomh46-rgb/DentaMedKlinika_bot',
+    repo: 'https://github.com/jaskarov/DentaMedKlinika_bot',
     demo: 'https://t.me/DentaMedKlinika_bot',
   },
   {
@@ -100,7 +100,7 @@ export const projects: Project[] = [
       { label: 'Extraction Accuracy', value: '99.2%' },
       { label: 'Uptime SLA', value: '99.9%' },
     ],
-    repo: 'https://github.com/salomh46-rgb/voice2deal-ai-bot',
+    repo: 'https://github.com/jaskarov/voice2deal-ai-bot',
     demo: 'https://t.me/Ovozli_SavdoBOT',
   },
   {
@@ -127,8 +127,8 @@ export const projects: Project[] = [
       { label: 'Supported Gates', value: '4 Providers' },
       { label: 'Overhead', value: '< 1ms' },
     ],
-    repo: 'https://github.com/salomh46-rgb/uzpayment-monorepo',
-    demo: 'https://github.com/salomh46-rgb/uzpayment-monorepo#readme',
+    repo: 'https://github.com/jaskarov/uzpayment-monorepo',
+    demo: 'https://github.com/jaskarov/uzpayment-monorepo#readme',
   },
   {
     id: 'collabflow-canvas',
@@ -154,8 +154,8 @@ export const projects: Project[] = [
       { label: 'AI Gen Time', value: '< 2.5s' },
       { label: 'Concurrent Users', value: '1,000+' },
     ],
-    repo: 'https://github.com/salomh46-rgb/collabflow-ai-canvas',
-    demo: 'https://github.com/salomh46-rgb/collabflow-ai-canvas#readme',
+    repo: 'https://github.com/jaskarov/collabflow-ai-canvas',
+    demo: 'https://github.com/jaskarov/collabflow-ai-canvas#readme',
   },
   {
     id: 'ai-code-reviewer',
@@ -181,7 +181,7 @@ export const projects: Project[] = [
       { label: 'OWASP Scans', value: '100%' },
       { label: 'Dev Time Saved', value: '80%' },
     ],
-    repo: 'https://github.com/salomh46-rgb/ai-code-reviewer-action',
-    demo: 'https://github.com/salomh46-rgb/ai-code-reviewer-action#readme',
+    repo: 'https://github.com/jaskarov/ai-code-reviewer-action',
+    demo: 'https://github.com/jaskarov/ai-code-reviewer-action#readme',
   },
 ];

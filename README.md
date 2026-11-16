@@ -1,201 +1,100 @@
-# Asqarov Javohirbek — Portfolio
+# Javohirbek Asqarov (Jasper) — Cosmic Quiet Luxury 3D Portfolio
 
-A modern dark-mode portfolio for a full-stack engineer and AI product developer.
+<div align="center">
 
-This version is set up for real lead generation: contact form, booking flow, Telegram alerts, EmailJS/Formspree, and webhook-based CRM/Google Sheets integration.
+[![Live Demo](https://img.shields.io/badge/🌐_LIVE_DEMO-bestportfoliyo.vercel.app-0070F3?style=for-the-badge&logo=vercel&logoColor=white)](https://bestportfoliyo.vercel.app/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![React 19](https://img.shields.io/badge/React-19.2-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![Three.js](https://img.shields.io/badge/Three.js-WebGL_/_WebGPU-black?style=for-the-badge&logo=three.js&logoColor=white)](https://threejs.org/)
+[![Tailwind CSS v4](https://img.shields.io/badge/Tailwind_CSS-v4.1-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+
+<br/>
+
+**Ultra-high-performance, interactive 3D spatial portfolio and enterprise acquisition platform.**  
+*Engineered for Senior Full-Cycle Systems Architect & Autonomous AI Founder showcase.*
+
+</div>
 
 ---
 
-## Quick start
+## 🌌 Key Architectural Capabilities
+
+1. **Cosmic Quiet Luxury Aesthetic (`#050608`):** Deep space obsidian palette, champagne gold accents, and subtle typography engineered to communicate prestige without visual noise.
+2. **Hybrid WebGPU & WebGL 2 Engine:** Dual-mode physics particle canvas supporting 1,000,000+ particles via WebGPU compute shaders with automatic WebGL 2 fallback.
+3. **Apple VisionOS-Style Spatial Audio:** Synthesized in-browser sound engine using Web Audio API HRTF spatial panning and tactile crystal feedback without external MP3 files.
+4. **Scrollytelling & Kinetic Motion:** GSAP ScrollTrigger and Framer Motion micro-interactions running at a steady 60 FPS.
+5. **Multi-Channel Lead Pipeline:** Enterprise lead capture engine with zero-leak routing:
+   * Real-time Telegram Bot alerts (`@Dr_eviluz`)
+   * Formspree & EmailJS integration
+   * Direct CRM / Google Sheets webhook forwarding
+   * Resilient fallback to mailto
+6. **Multi-Language Architecture:** Native, frictionless internationalization across Uzbek (UZ), Russian (RU), and English (EN).
+
+---
+
+## ⚡ Quick Start & Development
 
 ```bash
+# Clone the repository
+git clone https://github.com/jaskarov/Bestportfoliyo.git
+cd Bestportfoliyo
+
+# Install dependencies
 npm install
+
+# Start local development server (Vite)
 npm run dev
 ```
 
----
-
-## Lead capture integrations
-
-The project supports these real channels:
-
-1. Telegram bot notifications
-2. Formspree submissions
-3. EmailJS email delivery
-4. Google Sheets / CRM webhook forwarding
-5. Mail fallback if no service is configured
+Local server starts at `http://localhost:5173`.
 
 ---
 
-## Environment setup
-
-Copy the example file:
-
-```bash
-copy .env.example .env
-```
-
-Then fill in your credentials:
-
-```env
-VITE_CONTACT_EMAIL=salomh46@gmail.com
-VITE_EMAIL_PROVIDER=formspree
-VITE_FORMSPREE_ENDPOINT=https://formspree.io/f/your-form-id
-VITE_EMAILJS_PUBLIC_KEY=
-VITE_EMAILJS_SERVICE_ID=
-VITE_EMAILJS_TEMPLATE_ID=
-VITE_TELEGRAM_BOT_TOKEN=
-VITE_TELEGRAM_CHAT_ID=
-VITE_BOOKING_URL=https://cal.com/your-username
-VITE_GOOGLE_SHEET_WEBHOOK_URL=
-VITE_CRM_WEBHOOK_URL=
-```
-
-Notes:
-- Do not commit `.env` to Git
-- Keep `.env.example` as the template
-- Vite only exposes variables starting with `VITE_`
-
----
-
-## Telegram bot setup
-
-1. Open Telegram and create a bot with BotFather
-2. Copy the token
-3. Open a chat with your bot and send `/start`
-4. Get your chat ID using a bot like `@userinfobot`
-5. Add to `.env`:
-
-```env
-VITE_TELEGRAM_BOT_TOKEN=YOUR_BOT_TOKEN
-VITE_TELEGRAM_CHAT_ID=YOUR_CHAT_ID
-```
-
----
-
-## Formspree setup
-
-1. Create a form at https://formspree.io
-2. Copy the endpoint URL
-3. Add it:
-
-```env
-VITE_FORMSPREE_ENDPOINT=https://formspree.io/f/your-form-id
-```
-
----
-
-## EmailJS setup
-
-1. Register at https://www.emailjs.com
-2. Create an email service and template
-3. Add keys:
-
-```env
-VITE_EMAILJS_PUBLIC_KEY=your_public_key
-VITE_EMAILJS_SERVICE_ID=your_service_id
-VITE_EMAILJS_TEMPLATE_ID=your_template_id
-```
-
----
-
-## Google Sheets / CRM webhook setup
-
-You can use:
-- Apps Script
-- Make.com
-- Zapier
-- a direct webhook endpoint
-
-Example environment variables:
-
-```env
-VITE_GOOGLE_SHEET_WEBHOOK_URL=https://example.com/webhook
-VITE_CRM_WEBHOOK_URL=https://example.com/crm
-```
-
-The webhook payload contains:
-- name
-- email
-- message
-- source
-- bookingDate
-- bookingTime
-- timestamp
-
----
-
-## Booking flow
-
-The booking modal is wired to the same lead-pipeline. It can send a request to Telegram, EmailJS, Formspree, or a CRM/webhook. If no provider is configured, it falls back to `mailto:`.
-
-To connect a real calendar, set:
-
-```env
-VITE_BOOKING_URL=https://cal.com/your-username
-```
-
-and replace the local modal flow with a real scheduler as needed.
-
----
-
-## Build and deploy
+## 🛠️ Production Build
 
 ```bash
 npm run build
 ```
 
-Deploy the generated `dist` folder to:
-- Netlify
-- Vercel
-- GitHub Pages
-- any static hosting service
+The optimized single-file bundle is generated into the `dist/` directory, ready for deployment on Vercel, Netlify, or any edge CDN.
 
 ---
 
-## Project structure
+## 📁 Repository Structure
 
 ```text
-.
-├── .env.example
-├── .gitignore
-├── index.html
-├── package.json
+├── index.html                  # Semantic entry point with rich OpenGraph metadata
+├── public/
+│   ├── deck.html               # High-converting interactive investor/client slide deck
+│   └── _redirects              # SPA routing rules
 ├── src/
-│   ├── App.tsx
-│   ├── components/
-│   │   ├── AIChatWidget.tsx
-│   │   ├── BookingModal.tsx
-│   │   ├── ProjectModal.tsx
-│   │   ├── TestimonialsSection.tsx
-│   │   ├── UISoundEngine.tsx
-│   │   └── WorkProcessSection.tsx
+│   ├── App.tsx                 # Core application layout & motion orchestrator
+│   ├── components/             # Spatial 3D, Audio, and Interactive modules
+│   │   ├── AIChatWidget.tsx    # Autonomous AI concierge widget
+│   │   ├── BookingModal.tsx    # Cal.com & consultation scheduling flow
+│   │   ├── ProjectModal.tsx    # High-density architectural project inspect modal
+│   │   ├── UISoundEngine.tsx   # Web Audio API spatial acoustic synthesizer
+│   │   └── WorkProcessSection.tsx # 5-Step full-cycle discipline visualizer
 │   ├── data/
-│   │   └── projects.ts
-│   ├── localization.tsx
-│   ├── main.tsx
-│   ├── index.css
+│   │   └── projects.ts         # Production project matrix & live GitHub links
+│   ├── localization.tsx        # Trilingual translation dictionary (UZ/RU/EN)
 │   └── utils/
-│       ├── cn.ts
-│       └── leadCapture.ts
-└── dist/
+│       └── leadCapture.ts      # Multi-provider resilient lead forwarding engine
+└── vercel.json                 # Vercel Edge caching and security headers
 ```
 
 ---
 
-## Notes
+## 🌐 Connect with the Architect
 
-- The contact form and booking flow are now integration-ready
-- The fallback keeps the site working even when external services are not configured yet
-- Real email / booking / CRM actions should be configured in production environment variables
+* **Live Portfolio:** [bestportfoliyo.vercel.app](https://bestportfoliyo.vercel.app/)
+* **GitHub:** [@jaskarov](https://github.com/jaskarov)
+* **Telegram:** [@Dr_eviluz](https://t.me/Dr_eviluz)
+* **Email:** [salomh46@gmail.com](mailto:salomh46@gmail.com)
+* **Location:** Tashkent, Uzbekistan 🇺🇿
 
 ---
 
-## Contact
-
-- Phone: +998 90 508-33-02
-- Telegram: @Dr_eviluz
-- Email: salomh46@gmail.com
-- Location: Tashkent, Uzbekistan
-
-© 2026 Asqarov Javohirbek. All rights reserved.
+<div align="center">
+  <sub>© 2026 Javohirbek Asqarov (Jasper) • All rights reserved.</sub>
+</div>

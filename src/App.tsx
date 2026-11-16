@@ -1181,9 +1181,15 @@ const Footer = () => {
             {['GitHub', 'LinkedIn', 'Telegram'].map((social) => (
               <a
                 key={social}
-                href={social === 'Telegram' ? 'https://t.me/Dr_eviluz' : '#'}
-                target={social === 'Telegram' ? '_blank' : undefined}
-                rel={social === 'Telegram' ? 'noreferrer' : undefined}
+                href={
+                  social === 'Telegram'
+                    ? 'https://t.me/Dr_eviluz'
+                    : social === 'GitHub'
+                    ? 'https://github.com/jaskarov'
+                    : '#'
+                }
+                target={social === 'Telegram' || social === 'GitHub' ? '_blank' : undefined}
+                rel={social === 'Telegram' || social === 'GitHub' ? 'noreferrer' : undefined}
                 className="text-white/40 hover:text-[#D4AF37] text-sm transition-colors"
               >
                 {social}
