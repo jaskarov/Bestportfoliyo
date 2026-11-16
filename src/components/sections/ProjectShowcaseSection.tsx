@@ -1,6 +1,6 @@
 ﻿import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, Zap } from 'lucide-react';
 import { FlipGallery3D } from '../FlipGallery3D';
 import { projects, type Project } from '../../data/projects';
 

@@ -6,6 +6,8 @@ import { NeonBorderButton } from '../NeonBorderButton';
 import { MagneticSpringText } from '../MagneticSpringText';
 import { PCBTraceBorder } from '../PCBTraceBorder';
 import { SpatialTiltCard } from '../SpatialTiltCard';
+import { WebGPUCosmicCanvas } from '../WebGPUCosmicCanvas';
+import { CursorRingField } from '../CursorRingField';
 
 export const HeroSection = ({ onBookCall }: { onBookCall: () => void }) => {
   const ref = useRef(null);

@@ -8,7 +8,9 @@ import {
   MessageCircle, 
   Mail, 
   Phone, 
-  MapPin 
+  MapPin,
+  CheckCircle2,
+  ChevronRight 
 } from 'lucide-react';
 import { sendLead } from '../../utils/leadCapture';
 

@@ -13,6 +13,7 @@ export const FlipGallery3D: React.FC<FlipGallery3DProps> = ({
   onOpenProject,
 }) => {
   const [flipped, setFlipped] = useState<Record<number, boolean>>({});
+  const [, setActiveIdx] = useState<number | null>(null);
 
   const toggleFlip = (index: number, e: React.MouseEvent) => {
     e.stopPropagation();
